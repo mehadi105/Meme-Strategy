@@ -1,0 +1,233 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Pixel/Gaming Font Classes */
+.font-pixel {
+  font-family: 'Press Start 2P', monospace;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: none;
+  font-smoothing: none;
+}
+
+.font-retro {
+  font-family: 'Orbitron', monospace;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Pixel-style text shadows for 3D effect */
+.text-pixel-shadow {
+  text-shadow: 
+    2px 2px 0px #000,
+    4px 4px 0px rgba(0,0,0,0.5);
+}
+
+.text-pixel-glow {
+  text-shadow: 
+    0 0 5px currentColor,
+    0 0 10px currentColor,
+    0 0 15px currentColor,
+    2px 2px 0px #000;
+}
+
+/* Chunky button styles */
+.btn-pixel {
+  font-family: 'Press Start 2P', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 3px solid;
+  box-shadow: 
+    3px 3px 0px #000,
+    6px 6px 0px rgba(0,0,0,0.3);
+  transition: all 0.1s ease;
+}
+
+.btn-pixel:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 
+    4px 4px 0px #000,
+    7px 7px 0px rgba(0,0,0,0.3);
+}
+
+.btn-pixel:active {
+  transform: translate(2px, 2px);
+  box-shadow: 
+    1px 1px 0px #000,
+    2px 2px 0px rgba(0,0,0,0.3);
+}
+
+/* Pixel card styles */
+.card-pixel {
+  border: 3px solid;
+  box-shadow: 
+    4px 4px 0px #000,
+    8px 8px 0px rgba(0,0,0,0.2);
+}
+
+/* Retro heading styles */
+.heading-pixel {
+  font-family: 'Press Start 2P', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+}
+
+.heading-retro {
+  font-family: 'Orbitron', monospace;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+/* Tron-Style Grid Background */
+.bg-tron-grid {
+  background: radial-gradient(ellipse at center, #001D3D 0%, #000E2A 70%, #000814 100%);
+}
+
+/* Grid Perspective Animation */
+.grid-perspective {
+  animation: gridPulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes gridPulse {
+  0% {
+    filter: drop-shadow(0 0 8px rgba(0, 191, 255, 0.3));
+  }
+  100% {
+    filter: drop-shadow(0 0 12px rgba(0, 191, 255, 0.6));
+  }
+}
+
+/* Scan Lines Animation */
+@keyframes scanlines {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+/* Ticker Animation */
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll-left {
+  animation: scroll-left 60s linear infinite;
+}
+
+/* Radial Gradient Utility */
+.bg-gradient-radial {
+  background: radial-gradient(ellipse at center, var(--tw-gradient-stops));
+}
+
+/* Enhanced Glow Effects for Tron Theme */
+.tron-glow {
+  box-shadow: 
+    0 0 5px rgba(0, 191, 255, 0.5),
+    0 0 10px rgba(0, 191, 255, 0.3),
+    0 0 15px rgba(0, 191, 255, 0.2);
+}
+
+.tron-border {
+  border: 2px solid rgba(0, 191, 255, 0.6);
+  box-shadow: 
+    inset 0 0 10px rgba(0, 191, 255, 0.2),
+    0 0 10px rgba(0, 191, 255, 0.3);
+}
+
+/* Cyber Grid Lines */
+.cyber-grid {
+  background-image: 
+    linear-gradient(rgba(0, 191, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 191, 255, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Performance optimizations */
+* {
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .grid-perspective,
+  .animate-pulse:nth-child(n+6) {
+    display: none;
+  }
+  
+  .text-pixel-shadow {
+    text-shadow: 1px 1px 0px #000;
+  }
+  
+  .card-pixel {
+    box-shadow: 2px 2px 0px #000, 4px 4px 0px rgba(0,0,0,0.2);
+  }
+  
+  .btn-pixel {
+    box-shadow: 2px 2px 0px #000, 4px 4px 0px rgba(0,0,0,0.3);
+  }
+}
+
+html, body {
+  scroll-behavior: smooth;
+  background-color: #000E2A;
+}
+
+.card-pixel, .btn-pixel {
+  will-change: transform;
+}
+
+.pixel-border {
+  position: relative;
+  z-index: 1;
+}
+.pixel-border::before, .pixel-border::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 6px;
+  background: repeating-linear-gradient(
+    90deg,
+    #FFD600 0 8px, #00BFFF 8px 16px, #00FF00 16px 24px, #A020F0 24px 32px
+  );
+  animation: border-move 2s linear infinite;
+  z-index: 2;
+}
+.pixel-border::before { top: 0; }
+.pixel-border::after { bottom: 0; }
+.pixel-border .pixel-border-side {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 6px;
+  background: repeating-linear-gradient(
+    180deg,
+    #FFD600 0 8px, #00BFFF 8px 16px, #00FF00 16px 24px, #A020F0 24px 32px
+  );
+  animation: border-move-vert 2s linear infinite;
+  z-index: 2;
+}
+.pixel-border .pixel-border-left { left: 0; }
+.pixel-border .pixel-border-right { right: 0; }
+@keyframes border-move {
+  0% { background-position-x: 0; }
+  100% { background-position-x: 32px; }
+}
+@keyframes border-move-vert {
+  0% { background-position-y: 0; }
+  100% { background-position-y: 32px; }
+}
