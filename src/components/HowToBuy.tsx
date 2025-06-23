@@ -14,11 +14,11 @@ const HowToBuy = () => {
       details: [
         "Download and install MetaMask from metamask.io",
         "Create a new wallet or import existing seed phrase",
-        "Add BSC Testnet to your wallet networks",
+        "Add BSC Mainnet to your wallet networks",
         "Visit our presale page and click 'Connect Wallet'",
         "Select your wallet from the connection modal",
         "Approve the connection request in your wallet",
-        "Ensure you're on BSC Testnet (chain ID: 97)"
+        "Ensure you're on BSC Mainnet (chain ID: 56)"
       ],
       color: "from-cyan-500 to-blue-600",
       borderColor: "border-cyan-500"
@@ -30,7 +30,7 @@ const HowToBuy = () => {
       description: "Acquire BNB tokens for your purchase. You'll need BNB for both buying $MSTR tokens and paying gas fees.",
       details: [
         "Buy BNB from exchanges (Binance, Coinbase)",
-        "Use BSC testnet faucet for testing",
+        "Transfer BNB to your BSC wallet",
         "Send BNB to your wallet address",
         "Keep 0.001-0.005 BNB extra for gas",
         "Minimum purchase: 0.01 BNB",
@@ -102,7 +102,7 @@ const HowToBuy = () => {
         "Clear browser cache and cookies",
         "Disable browser extensions (except wallet)",
         "Try a different browser (Chrome, Firefox)",
-        "Ensure you're on BSC Testnet (Chain ID: 97)"
+        "Ensure you're on BSC Mainnet (Chain ID: 56)"
       ]
     },
     {
@@ -128,10 +128,10 @@ const HowToBuy = () => {
   ];
 
   const contractInfo = {
-    presale: "0xeD9E181C38B1fF42d863B86b5879a761e1ab244a",
+    presale: "0x52b8dD7253BE47f3076b918800b96797a45c8795",
     token: "0x78e3efa2450239561F204D937F6A5a5f95DE5a06",
-    network: "BSC Testnet",
-    chainId: "97"
+    network: "BSC Mainnet",
+    chainId: "56"
   };
 
   const bonusInfo = [
@@ -357,7 +357,7 @@ const HowToBuy = () => {
               <h3 className="font-pixel text-orange-400 text-lg mb-4 text-center">⚠️ IMPORTANT NOTICE</h3>
               <div className="space-y-3">
                 <p className="font-retro text-gray-300 text-xs leading-relaxed">
-                  • This is a testnet deployment for demonstration purposes
+                  • This is a live mainnet deployment - real funds involved
                 </p>
                 <p className="font-retro text-gray-300 text-xs leading-relaxed">
                   • Always DYOR (Do Your Own Research) before investing

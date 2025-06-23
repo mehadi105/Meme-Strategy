@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useReadContract, useWatchContractEvent } from 'wagmi';
 import { formatEther } from 'viem';
 
-const PRESALE_ADDRESS = '0xeD9E181C38B1fF42d863B86b5879a761e1ab244a' as const;
+const PRESALE_ADDRESS = '0x52b8dD7253BE47f3076b918800b96797a45c8795' as const;
 
 const PRESALE_ABI = [
   {
