@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useAccount, useContractRead, useContractWrite, useWaitForTransaction } from 'wagmi';
+import { useAccount, useReadContract, useWriteContract } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { formatEther, parseEther } from 'viem';
 import { toast } from 'react-hot-toast';
@@ -76,68 +76,52 @@ export default function Presale() {
   const [showReferral, setShowReferral] = useState(false);
 
   // Contract reads
-  const { data: currentTier } = useContractRead({
+  const { data: currentTier } = useReadContract({
     address: PRESALE_ADDRESS,
     abi: PRESALE_ABI,
     functionName: 'currentTier',
-    watch: true,
   });
 
-  const { data: currentPrice } = useContractRead({
+  const { data: currentPrice } = useReadContract({
     address: PRESALE_ADDRESS,
     abi: PRESALE_ABI,
     functionName: 'nextPrice',
-    watch: true,
   });
 
-  const { data: totalSold } = useContractRead({
+  const { data: totalSold } = useReadContract({
     address: PRESALE_ADDRESS,
     abi: PRESALE_ABI,
     functionName: 'totalSold',
-    watch: true,
   });
 
-  const { data: totalRaised } = useContractRead({
+  const { data: totalRaised } = useReadContract({
     address: PRESALE_ADDRESS,
     abi: PRESALE_ABI,
     functionName: 'totalRaised',
-    watch: true,
   });
 
-  const { data: buyerCount } = useContractRead({
+  const { data: buyerCount } = useReadContract({
     address: PRESALE_ADDRESS,
     abi: PRESALE_ABI,
     functionName: 'buyerCount',
-    watch: true,
   });
 
-  const { data: totalPresaleTokens } = useContractRead({
+  const { data: totalPresaleTokens } = useReadContract({
     address: PRESALE_ADDRESS,
     abi: PRESALE_ABI,
     functionName: 'TOTAL_PRESALE_TOKENS',
   });
 
   // Buy functions
-  const { write: buyWithoutReferral, isLoading: isBuyingNoRef } = useContractWrite({
-    address: PRESALE_ADDRESS,
-    abi: PRESALE_ABI,
-    functionName: 'buy',
-    args: [],
-  });
-
-  const { write: buyWithReferral, isLoading: isBuyingWithRef } = useContractWrite({
-    address: PRESALE_ADDRESS,
-    abi: PRESALE_ABI,
-    functionName: 'buy',
-    args: [referralAddress as `0x${string}`],
-  });
+  const { writeContract: buyWithoutReferral, isPending: isBuyingNoRef } = useWriteContract();
+  const { writeContract: buyWithReferral, isPending: isBuyingWithRef } = useWriteContract();
 
   // Calculate token amount
   const calculateTokenAmount = (bnb: string) => {
     if (!currentPrice || !bnb || parseFloat(bnb) === 0) return '0';
     try {
       const bnbWei = parseEther(bnb);
-      const pricePerToken = BigInt(currentPrice as string);
+      const pricePerToken = currentPrice as bigint;
       const tokenAmount = (bnbWei * BigInt(1e18)) / pricePerToken;
       return formatEther(tokenAmount);
     } catch {
@@ -168,12 +152,24 @@ export default function Presale() {
       const value = parseEther(bnbAmount);
       
       if (showReferral && referralAddress) {
-        await buyWithReferral?.({ value });
+        buyWithReferral({
+          address: PRESALE_ADDRESS,
+          abi: PRESALE_ABI,
+          functionName: 'buy',
+          args: [referralAddress as `0x${string}`],
+          value,
+        });
       } else {
-        await buyWithoutReferral?.({ value });
+        buyWithoutReferral({
+          address: PRESALE_ADDRESS,
+          abi: PRESALE_ABI,
+          functionName: 'buy',
+          args: [],
+          value,
+        });
       }
       
-      toast.success('Transaction submitted!');
+      toast.success('Transaction submitted! Please confirm in your wallet.');
     } catch (error) {
       toast.error('Transaction failed');
       console.error(error);
@@ -187,77 +183,92 @@ export default function Presale() {
   const bonuses = calculateBonuses();
 
   return (
-    <div className="min-h-screen bg-black text-white py-20 px-4">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-tron-grid relative overflow-hidden py-20 px-4">
+      {/* Tron-Style Grid Background */}
+      <div className="fixed inset-0 pointer-events-none">
+        {/* Deep Navy Radial Gradient Base */}
+        <div className="absolute inset-0 bg-gradient-radial from-slate-900 via-blue-950 to-black"></div>
+        
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-20 left-10 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-cyan-400/10 rounded-full blur-3xl animate-pulse delay-500"></div>
+        </div>
+      </div>
+
+      <div className="relative z-10 max-w-4xl mx-auto">
         {/* Back Button */}
         <button 
           onClick={() => navigate('/')}
-          className="flex items-center gap-2 text-gray-400 hover:text-white mb-8 transition-colors"
+          className="btn-pixel bg-gradient-to-r from-slate-700 to-slate-800 hover:from-slate-600 hover:to-slate-700 text-cyan-400 border-cyan-500 px-4 py-2 text-xs mb-8 flex items-center gap-2"
         >
-          <ArrowLeft size={20} />
-          <span>Back to Home</span>
+          <ArrowLeft size={16} />
+          <span className="font-pixel">BACK TO HOME</span>
         </button>
         
-        <h1 className="text-5xl font-bold text-center mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-          $MSTR Presale
+        <h1 className="heading-pixel text-3xl sm:text-5xl lg:text-6xl text-center mb-4 leading-tight text-pixel-shadow">
+          <span className="bg-gradient-to-r from-orange-400 via-cyan-400 to-yellow-400 bg-clip-text text-transparent">
+            $MSTR PRESALE
+          </span>
         </h1>
-        <p className="text-center text-gray-400 mb-12">Join the revolution early and get exclusive bonuses!</p>
+        <p className="font-retro text-center text-cyan-400 mb-12 text-sm sm:text-base uppercase tracking-wider">Join the revolution early and get exclusive bonuses!</p>
 
         {/* Stats Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-          <div className="bg-purple-900/20 backdrop-blur-md rounded-xl p-4 border border-purple-500/20">
-            <p className="text-gray-400 text-sm">Current Tier</p>
-            <p className="text-2xl font-bold text-purple-400">{currentTier?.toString() || '1'}/50</p>
+          <div className="card-pixel bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-xl p-4 border-cyan-500 hover:border-cyan-400 transition-all duration-300 hover:scale-105">
+            <p className="font-pixel text-cyan-400 text-xs mb-2">CURRENT TIER</p>
+            <p className="heading-pixel text-white text-lg sm:text-xl text-pixel-glow">{currentTier?.toString() || '1'}/50</p>
           </div>
-          <div className="bg-purple-900/20 backdrop-blur-md rounded-xl p-4 border border-purple-500/20">
-            <p className="text-gray-400 text-sm">Current Price</p>
-            <p className="text-2xl font-bold text-green-400">
+          <div className="card-pixel bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-xl p-4 border-cyan-500 hover:border-cyan-400 transition-all duration-300 hover:scale-105">
+            <p className="font-pixel text-cyan-400 text-xs mb-2">CURRENT PRICE</p>
+            <p className="heading-pixel text-green-400 text-lg sm:text-xl text-pixel-glow">
               {currentPrice ? formatEther(currentPrice as bigint).substring(0, 8) : '0.0005'} BNB
             </p>
           </div>
-          <div className="bg-purple-900/20 backdrop-blur-md rounded-xl p-4 border border-purple-500/20">
-            <p className="text-gray-400 text-sm">Total Raised</p>
-            <p className="text-2xl font-bold text-yellow-400">
+          <div className="card-pixel bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-xl p-4 border-cyan-500 hover:border-cyan-400 transition-all duration-300 hover:scale-105">
+            <p className="font-pixel text-cyan-400 text-xs mb-2">TOTAL RAISED</p>
+            <p className="heading-pixel text-yellow-400 text-lg sm:text-xl text-pixel-glow">
               {totalRaised ? formatEther(totalRaised as bigint).substring(0, 8) : '0'} BNB
             </p>
           </div>
-          <div className="bg-purple-900/20 backdrop-blur-md rounded-xl p-4 border border-purple-500/20">
-            <p className="text-gray-400 text-sm">Participants</p>
-            <p className="text-2xl font-bold text-blue-400">{buyerCount?.toString() || '0'}</p>
+          <div className="card-pixel bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-xl p-4 border-cyan-500 hover:border-cyan-400 transition-all duration-300 hover:scale-105">
+            <p className="font-pixel text-cyan-400 text-xs mb-2">PARTICIPANTS</p>
+            <p className="heading-pixel text-orange-400 text-lg sm:text-xl text-pixel-glow">{buyerCount?.toString() || '0'}</p>
           </div>
         </div>
 
         {/* Progress Bar */}
-        <div className="mb-12">
-          <div className="flex justify-between text-sm mb-2">
-            <span>Progress</span>
-            <span>{soldPercentage.toFixed(2)}% Sold</span>
+        <div className="card-pixel bg-gradient-to-br from-slate-800/30 to-slate-900/30 backdrop-blur-sm rounded-xl p-6 border-cyan-500/50 mb-12">
+          <div className="flex justify-between text-sm mb-4">
+            <span className="font-pixel text-cyan-400 text-xs">PRESALE PROGRESS</span>
+            <span className="font-pixel text-green-400 text-xs">{soldPercentage.toFixed(2)}% SOLD</span>
           </div>
-          <div className="w-full bg-gray-800 rounded-full h-4 overflow-hidden">
+          <div className="w-full bg-slate-700 rounded-full h-4 border-2 border-slate-600 overflow-hidden">
             <div 
-              className="h-full bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-500"
+              className="h-full bg-gradient-to-r from-green-400 to-cyan-400 transition-all duration-500 animate-pulse"
               style={{ width: `${soldPercentage}%` }}
             />
           </div>
-          <div className="flex justify-between text-xs text-gray-400 mt-2">
-            <span>{totalSold ? (Number(formatEther(totalSold as bigint)) / 1e9).toFixed(2) : '0'}B $MSTR</span>
-            <span>3.5B $MSTR</span>
+          <div className="flex justify-between text-xs mt-4">
+            <span className="font-pixel text-orange-400">{totalSold ? (Number(formatEther(totalSold as bigint)) / 1e9).toFixed(2) : '0'}B $MSTR</span>
+            <span className="font-pixel text-yellow-400">3.5B $MSTR</span>
           </div>
         </div>
 
         {/* Buy Section */}
-        <div className="bg-gradient-to-br from-purple-900/20 to-pink-900/20 backdrop-blur-md rounded-2xl p-8 border border-purple-500/20">
+        <div className="card-pixel bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-md rounded-2xl p-8 border-cyan-500">
           {/* Referral Toggle */}
           <div className="flex items-center justify-between mb-6">
-            <span className="text-lg">Have a referral code?</span>
+            <span className="font-pixel text-cyan-400 text-xs">HAVE A REFERRAL CODE?</span>
             <button
               onClick={() => setShowReferral(!showReferral)}
-              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                showReferral ? 'bg-purple-600' : 'bg-gray-600'
+              className={`btn-pixel relative inline-flex h-6 w-11 items-center rounded-full transition-all border-2 ${
+                showReferral ? 'bg-cyan-500 border-cyan-400' : 'bg-slate-600 border-slate-500'
               }`}
             >
               <span
-                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform ${
                   showReferral ? 'translate-x-6' : 'translate-x-1'
                 }`}
               />
@@ -266,76 +277,90 @@ export default function Presale() {
 
           {showReferral && (
             <div className="mb-6">
-              <label className="block text-sm text-gray-400 mb-2">Referral Address</label>
+              <label className="block font-pixel text-cyan-400 text-xs mb-3">REFERRAL ADDRESS</label>
               <input
                 type="text"
                 placeholder="0x..."
                 value={referralAddress}
                 onChange={(e) => setReferralAddress(e.target.value)}
-                className="w-full px-4 py-3 bg-black/50 border border-purple-500/30 rounded-lg focus:outline-none focus:border-purple-500"
+                className="w-full px-4 py-3 bg-slate-900/80 border-2 border-cyan-500/50 rounded-lg focus:outline-none focus:border-cyan-400 text-white font-retro tron-glow"
               />
-              <p className="text-xs text-green-400 mt-1">Get 5% bonus tokens with valid referral!</p>
+              <p className="font-pixel text-green-400 text-xs mt-2">GET 5% BONUS TOKENS WITH VALID REFERRAL!</p>
             </div>
           )}
 
           {/* BNB Input */}
           <div className="mb-6">
-            <label className="block text-sm text-gray-400 mb-2">Amount (BNB)</label>
+            <label className="block font-pixel text-cyan-400 text-xs mb-3">AMOUNT (BNB)</label>
             <input
               type="number"
               placeholder="0.1"
               value={bnbAmount}
               onChange={(e) => setBnbAmount(e.target.value)}
-              className="w-full px-4 py-3 bg-black/50 border border-purple-500/30 rounded-lg focus:outline-none focus:border-purple-500 text-xl"
+              className="w-full px-4 py-4 bg-slate-900/80 border-2 border-cyan-500/50 rounded-lg focus:outline-none focus:border-cyan-400 text-white text-2xl font-retro tron-glow"
             />
           </div>
 
           {/* Token Calculation */}
-          <div className="bg-black/30 rounded-lg p-4 mb-6">
-            <div className="flex justify-between mb-2">
-              <span className="text-gray-400">You will receive:</span>
-              <span className="text-xl font-bold">{calculateTokenAmount(bnbAmount)} $MSTR</span>
+          <div className="card-pixel bg-gradient-to-r from-slate-900 to-slate-800 rounded-xl p-4 border-cyan-500 mb-6">
+            <div className="flex justify-between mb-3">
+              <span className="font-pixel text-cyan-400 text-xs">YOU WILL RECEIVE:</span>
+              <span className="heading-pixel text-white text-lg text-pixel-glow">{calculateTokenAmount(bnbAmount)} $MSTR</span>
             </div>
-            {currentTier && Number(currentTier) <= 3 && (
-              <div className="flex justify-between text-sm text-green-400">
-                <span>Early Bird Bonus (10%):</span>
-                <span>+{bonuses.earlyBonus.toFixed(2)} $MSTR</span>
+            {currentTier !== undefined && Number(currentTier) <= 3 && (
+              <div className="flex justify-between text-sm mb-2">
+                <span className="font-pixel text-green-400 text-xs">EARLY BIRD BONUS (10%):</span>
+                <span className="font-pixel text-green-400 text-xs">+{bonuses.earlyBonus.toFixed(2)} $MSTR</span>
               </div>
             )}
             {showReferral && referralAddress && (
-              <div className="flex justify-between text-sm text-blue-400">
-                <span>Referral Bonus (5%):</span>
-                <span>+{bonuses.referralBonus.toFixed(2)} $MSTR</span>
+              <div className="flex justify-between text-sm mb-2">
+                <span className="font-pixel text-blue-400 text-xs">REFERRAL BONUS (5%):</span>
+                <span className="font-pixel text-blue-400 text-xs">+{bonuses.referralBonus.toFixed(2)} $MSTR</span>
               </div>
             )}
-            <div className="border-t border-gray-700 mt-2 pt-2 flex justify-between">
-              <span className="text-gray-400">Total:</span>
-              <span className="text-2xl font-bold text-purple-400">{bonuses.total.toFixed(2)} $MSTR</span>
+            <div className="border-t-2 border-cyan-500/50 mt-3 pt-3 flex justify-between">
+              <span className="font-pixel text-cyan-400 text-xs">TOTAL:</span>
+              <span className="heading-pixel text-orange-400 text-xl text-pixel-glow">{bonuses.total.toFixed(2)} $MSTR</span>
             </div>
           </div>
 
           {/* Buy Button */}
           {!isConnected ? (
             <div className="flex justify-center">
-              <ConnectButton />
+              <div className="btn-pixel bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-600 hover:to-cyan-700 text-white border-cyan-700 px-8 py-4">
+                <ConnectButton />
+              </div>
             </div>
           ) : (
             <button
               onClick={handleBuy}
               disabled={isBuyingNoRef || isBuyingWithRef}
-              className="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-lg font-bold text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              className="btn-pixel w-full py-4 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white border-orange-700 font-pixel text-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105"
             >
-              {isBuyingNoRef || isBuyingWithRef ? 'Processing...' : 'Buy $MSTR'}
+              {isBuyingNoRef || isBuyingWithRef ? 'PROCESSING...' : 'BUY $MSTR'}
             </button>
           )}
 
           {/* Info */}
-          <div className="mt-6 space-y-2 text-sm text-gray-400">
-            <p>• Minimum purchase: 0.001 BNB</p>
-            <p>• Tokens are transferred instantly to your wallet</p>
-            <p>• Price increases with each tier</p>
-            {currentTier && Number(currentTier) <= 3 && (
-              <p className="text-green-400">• 10% Early Bird Bonus active for first 3 tiers!</p>
+          <div className="mt-6 space-y-3">
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+              <p className="font-pixel text-cyan-400 text-xs">MINIMUM PURCHASE: 0.001 BNB</p>
+            </div>
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+              <p className="font-pixel text-green-400 text-xs">TOKENS TRANSFERRED INSTANTLY</p>
+            </div>
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+              <p className="font-pixel text-yellow-400 text-xs">PRICE INCREASES WITH EACH TIER</p>
+            </div>
+            {currentTier !== undefined && Number(currentTier) <= 3 && (
+              <div className="flex items-center space-x-2">
+                <div className="w-2 h-2 bg-orange-400 rounded-full animate-pulse"></div>
+                <p className="font-pixel text-orange-400 text-xs">10% EARLY BIRD BONUS ACTIVE!</p>
+              </div>
             )}
           </div>
         </div>
