@@ -1,6 +1,9 @@
 import { TrendingUp, Coins, DollarSign, Bitcoin } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
+  const navigate = useNavigate();
+  
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
       {/* Animated Background Elements */}
@@ -77,7 +80,10 @@ const Hero = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start mb-8 sm:mb-12 px-4 lg:px-0">
-              <button className="btn-pixel bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white border-orange-700 px-4 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm hover:scale-105 transition-all duration-300">
+              <button 
+                onClick={() => navigate('/presale')}
+                className="btn-pixel bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white border-orange-700 px-4 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm hover:scale-105 transition-all duration-300"
+              >
                 JOIN THE $MSTR PRESALE
               </button>
               <button 
