@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useReadContract, useWatchContractEvent } from 'wagmi';
 import { formatEther } from 'viem';
 
@@ -193,7 +193,7 @@ export default function BondingCurve({ width = 800, height = 400, className = ""
     let path = `M ${points[0].x} ${points[0].y}`;
     
     for (let i = 1; i < points.length; i++) {
-      const prev = points[i - 1];
+      const _prev = points[i - 1];
       const current = points[i];
       const next = points[i + 1];
       

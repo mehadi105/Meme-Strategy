@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useAccount, useReadContract, useWriteContract, useWatchContractEvent } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { formatEther, parseEther } from 'viem';
@@ -8,7 +8,6 @@ import { ArrowLeft } from 'lucide-react';
 import BondingCurve from './BondingCurve';
 
 const PRESALE_ADDRESS = '0xeD9E181C38B1fF42d863B86b5879a761e1ab244a' as const;
-const TOKEN_ADDRESS = '0x78e3efa2450239561F204D937F6A5a5f95DE5a06' as const;
 
 const PRESALE_ABI = [
   {
@@ -375,7 +374,17 @@ export default function Presale() {
           </span>
         </div>
         
-        <p className="font-retro text-center text-cyan-400 mb-12 text-sm sm:text-base uppercase tracking-wider">Join the revolution early and get exclusive bonuses!</p>
+        <p className="font-retro text-center text-cyan-400 mb-8 text-sm sm:text-base uppercase tracking-wider">Join the revolution early and get exclusive bonuses!</p>
+        
+        {/* How to Buy Button */}
+        <div className="flex justify-center mb-12">
+          <button 
+            onClick={() => navigate('/how-to-buy')}
+            className="btn-pixel bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 text-white border-purple-700 px-6 py-3 text-xs hover:scale-105 transition-all duration-300 flex items-center gap-2"
+          >
+            <span className="font-pixel">📚 HOW TO BUY $MSTR</span>
+          </button>
+        </div>
 
         {/* Stats Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">

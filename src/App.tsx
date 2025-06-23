@@ -10,6 +10,7 @@ import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import Ticker from './components/Ticker';
 import Presale from './components/Presale';
+import HowToBuy from './components/HowToBuy';
 import { Toaster } from 'react-hot-toast';
 
 function HomePage() {
@@ -132,6 +133,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/presale" element={<Presale />} />
+            <Route path="/how-to-buy" element={<HowToBuy />} />
           </Routes>
         </div>
 
