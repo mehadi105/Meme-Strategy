@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useAccount, useReadContract, useWriteContract } from 'wagmi';
+import { useAccount, useReadContract, useWriteContract, useWatchContractEvent } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { formatEther, parseEther } from 'viem';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
+import BondingCurve from './BondingCurve';
 
 const PRESALE_ADDRESS = '0xeD9E181C38B1fF42d863B86b5879a761e1ab244a' as const;
 const TOKEN_ADDRESS = '0x78e3efa2450239561F204D937F6A5a5f95DE5a06' as const;
@@ -65,6 +66,26 @@ const PRESALE_ABI = [
     "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
     "stateMutability": "view",
     "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "TOKENS_PER_TIER",
+    "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {"indexed": true, "internalType": "address", "name": "buyer", "type": "address"},
+      {"indexed": false, "internalType": "uint256", "name": "amountBNB", "type": "uint256"},
+      {"indexed": false, "internalType": "uint256", "name": "tokensBase", "type": "uint256"},
+      {"indexed": false, "internalType": "uint256", "name": "bonusEarly", "type": "uint256"},
+      {"indexed": false, "internalType": "uint256", "name": "bonusReferral", "type": "uint256"},
+      {"indexed": true, "internalType": "address", "name": "referrer", "type": "address"}
+    ],
+    "name": "Bought",
+    "type": "event"
   }
 ] as const;
 
@@ -74,47 +95,104 @@ export default function Presale() {
   const [bnbAmount, setBnbAmount] = useState('');
   const [referralAddress, setReferralAddress] = useState('');
   const [showReferral, setShowReferral] = useState(false);
+  const [isLive, setIsLive] = useState(true);
+  const [lastUpdate, setLastUpdate] = useState(Date.now());
 
-  // Contract reads
-  const { data: currentTier } = useReadContract({
+  // Contract reads with real-time polling
+  const { data: currentTier, refetch: refetchTier } = useReadContract({
     address: PRESALE_ADDRESS,
     abi: PRESALE_ABI,
     functionName: 'currentTier',
+    query: {
+      refetchInterval: 3000, // Refetch every 3 seconds
+    },
   });
 
-  const { data: currentPrice } = useReadContract({
+  const { data: currentPrice, refetch: refetchPrice } = useReadContract({
     address: PRESALE_ADDRESS,
     abi: PRESALE_ABI,
     functionName: 'nextPrice',
+    query: {
+      refetchInterval: 3000,
+    },
   });
 
-  const { data: totalSold } = useReadContract({
+  const { data: totalSold, refetch: refetchTotalSold } = useReadContract({
     address: PRESALE_ADDRESS,
     abi: PRESALE_ABI,
     functionName: 'totalSold',
+    query: {
+      refetchInterval: 2000, // More frequent for progress bar
+    },
   });
 
-  const { data: totalRaised } = useReadContract({
+  const { data: totalRaised, refetch: refetchTotalRaised } = useReadContract({
     address: PRESALE_ADDRESS,
     abi: PRESALE_ABI,
     functionName: 'totalRaised',
+    query: {
+      refetchInterval: 3000,
+    },
   });
 
-  const { data: buyerCount } = useReadContract({
+  const { data: buyerCount, refetch: refetchBuyerCount } = useReadContract({
     address: PRESALE_ADDRESS,
     abi: PRESALE_ABI,
     functionName: 'buyerCount',
+    query: {
+      refetchInterval: 5000,
+    },
   });
 
   const { data: totalPresaleTokens } = useReadContract({
     address: PRESALE_ADDRESS,
     abi: PRESALE_ABI,
     functionName: 'TOTAL_PRESALE_TOKENS',
+    // No refetch needed - this is a constant
+  });
+
+  const { data: tokensPerTier } = useReadContract({
+    address: PRESALE_ADDRESS,
+    abi: PRESALE_ABI,
+    functionName: 'TOKENS_PER_TIER',
+    // No refetch needed - this is a constant
   });
 
   // Buy functions
   const { writeContract: buyWithoutReferral, isPending: isBuyingNoRef } = useWriteContract();
   const { writeContract: buyWithReferral, isPending: isBuyingWithRef } = useWriteContract();
+
+  // Watch for Bought events to trigger immediate updates
+  useWatchContractEvent({
+    address: PRESALE_ADDRESS,
+    abi: PRESALE_ABI,
+    eventName: 'Bought',
+    onLogs(logs) {
+      console.log('New purchase detected!', logs);
+      // Immediately refetch all data when someone buys
+      refetchTotalSold();
+      refetchTotalRaised();
+      refetchBuyerCount();
+      refetchTier();
+      refetchPrice();
+      setLastUpdate(Date.now());
+      
+      // Show notification for new purchases
+      if (logs.length > 0) {
+        const log = logs[0];
+        const buyer = log.args.buyer;
+        const amountBNB = log.args.amountBNB;
+        const tokensBase = log.args.tokensBase;
+        
+        if (buyer !== address) { // Only show for other people's purchases
+          toast.success(
+            `🚀 Someone just bought ${formatEther(tokensBase as bigint).substring(0, 8)} $MSTR for ${formatEther(amountBNB as bigint).substring(0, 6)} BNB!`,
+            { duration: 4000 }
+          );
+        }
+      }
+    },
+  });
 
   // Calculate token amount
   const calculateTokenAmount = (bnb: string) => {
@@ -176,11 +254,87 @@ export default function Presale() {
     }
   };
 
-  const soldPercentage = totalSold && totalPresaleTokens 
-    ? (Number(formatEther(totalSold as bigint)) / Number(formatEther(totalPresaleTokens as bigint))) * 100
-    : 0;
+  // Calculate progress with high precision for small amounts
+  const calculateSoldPercentage = () => {
+    if (!totalSold || !totalPresaleTokens) return 0;
+    
+    // Use BigInt arithmetic for precision, then convert
+    const sold = totalSold as bigint;
+    const total = totalPresaleTokens as bigint;
+    
+    // Multiply by 10000 to get 4 decimal places, then divide by 100 for percentage
+    const progressBigInt = (sold * BigInt(10000)) / total;
+    const progress = Number(progressBigInt) / 100;
+    
+    return progress;
+  };
+
+  const soldPercentage = calculateSoldPercentage();
+
+  // Format progress with appropriate decimal places
+  const formatSoldProgress = (progress: number) => {
+    if (progress === 0) return '0.000';
+    if (progress < 0.001) return progress.toFixed(6);
+    if (progress < 0.01) return progress.toFixed(4);
+    if (progress < 1) return progress.toFixed(3);
+    return progress.toFixed(2);
+  };
+
+  // Calculate current tier progress
+  const currentTierProgress = () => {
+    if (!totalSold || !tokensPerTier || !currentTier) return 0;
+    const tierNumber = Number(currentTier);
+    const soldTokens = Number(formatEther(totalSold as bigint));
+    const tokensPerTierNum = Number(formatEther(tokensPerTier as bigint));
+    const tokensInPreviousTiers = (tierNumber - 1) * tokensPerTierNum;
+    const tokensInCurrentTier = soldTokens - tokensInPreviousTiers;
+    return Math.min((tokensInCurrentTier / tokensPerTierNum) * 100, 100);
+  };
+
+  // Calculate tokens remaining in current tier
+  const tokensRemainingInTier = () => {
+    if (!tokensPerTier || !totalSold || !currentTier) return '0';
+    const tierNumber = Number(currentTier);
+    const soldTokens = Number(formatEther(totalSold as bigint));
+    const tokensPerTierNum = Number(formatEther(tokensPerTier as bigint));
+    const tokensInPreviousTiers = (tierNumber - 1) * tokensPerTierNum;
+    const tokensInCurrentTier = soldTokens - tokensInPreviousTiers;
+    const remaining = tokensPerTierNum - tokensInCurrentTier;
+    return (remaining / 1e9).toFixed(2); // Convert to billions
+  };
 
   const bonuses = calculateBonuses();
+
+  // Debug presale data (remove this later)
+  useEffect(() => {
+    if (totalSold && totalPresaleTokens) {
+      console.log('📊 Presale Debug:', {
+        totalSold: totalSold.toString(),
+        totalPresaleTokens: totalPresaleTokens.toString(),
+        totalSoldEther: formatEther(totalSold as bigint),
+        totalPresaleEther: formatEther(totalPresaleTokens as bigint),
+        soldPercentage: soldPercentage,
+        formattedProgress: formatSoldProgress(soldPercentage),
+        currentTier: currentTier?.toString(),
+        currentPrice: currentPrice?.toString()
+      });
+    }
+  }, [totalSold, totalPresaleTokens, soldPercentage, currentTier, currentPrice]);
+
+  // Update live indicator when data changes
+  useEffect(() => {
+    setLastUpdate(Date.now());
+  }, [totalSold, totalRaised, buyerCount, currentTier, currentPrice]);
+
+  // Live status indicator
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const timeSinceUpdate = Date.now() - lastUpdate;
+      setIsLive(timeSinceUpdate < 10000); // Consider live if updated within 10 seconds
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [lastUpdate]);
 
   return (
     <div className="min-h-screen bg-tron-grid relative overflow-hidden py-20 px-4">
@@ -208,10 +362,19 @@ export default function Presale() {
         </button>
         
         <h1 className="heading-pixel text-3xl sm:text-5xl lg:text-6xl text-center mb-4 leading-tight text-pixel-shadow">
-          <span className="bg-gradient-to-r from-orange-400 via-cyan-400 to-yellow-400 bg-clip-text text-transparent">
+          <span className="text-fuchsia-400 text-pixel-glow">
             $MSTR PRESALE
           </span>
         </h1>
+        
+        {/* Live Indicator */}
+        <div className="flex justify-center items-center gap-2 mb-6">
+          <div className={`w-3 h-3 rounded-full ${isLive ? 'bg-green-400 animate-pulse' : 'bg-red-400'} transition-colors`}></div>
+          <span className={`font-pixel text-xs ${isLive ? 'text-green-400' : 'text-red-400'}`}>
+            {isLive ? 'LIVE DATA' : 'RECONNECTING...'}
+          </span>
+        </div>
+        
         <p className="font-retro text-center text-cyan-400 mb-12 text-sm sm:text-base uppercase tracking-wider">Join the revolution early and get exclusive bonuses!</p>
 
         {/* Stats Grid */}
@@ -240,21 +403,45 @@ export default function Presale() {
 
         {/* Progress Bar */}
         <div className="card-pixel bg-gradient-to-br from-slate-800/30 to-slate-900/30 backdrop-blur-sm rounded-xl p-6 border-cyan-500/50 mb-12">
+          {/* Overall Progress */}
           <div className="flex justify-between text-sm mb-4">
-            <span className="font-pixel text-cyan-400 text-xs">PRESALE PROGRESS</span>
-            <span className="font-pixel text-green-400 text-xs">{soldPercentage.toFixed(2)}% SOLD</span>
+            <span className="font-pixel text-cyan-400 text-xs">OVERALL PROGRESS</span>
+            <span className="font-pixel text-green-400 text-xs">{formatSoldProgress(soldPercentage)}% SOLD</span>
           </div>
-          <div className="w-full bg-slate-700 rounded-full h-4 border-2 border-slate-600 overflow-hidden">
+          <div className="w-full bg-slate-700 rounded-full h-4 border-2 border-slate-600 overflow-hidden mb-6">
             <div 
               className="h-full bg-gradient-to-r from-green-400 to-cyan-400 transition-all duration-500 animate-pulse"
               style={{ width: `${soldPercentage}%` }}
             />
           </div>
-          <div className="flex justify-between text-xs mt-4">
+          <div className="flex justify-between text-xs mb-6">
             <span className="font-pixel text-orange-400">{totalSold ? (Number(formatEther(totalSold as bigint)) / 1e9).toFixed(2) : '0'}B $MSTR</span>
             <span className="font-pixel text-yellow-400">3.5B $MSTR</span>
           </div>
+
+          {/* Current Tier Progress */}
+          <div className="border-t-2 border-cyan-500/30 pt-4">
+            <div className="flex justify-between text-sm mb-3">
+              <span className="font-pixel text-cyan-400 text-xs">TIER {currentTier?.toString() || '1'} PROGRESS</span>
+              <span className="font-pixel text-orange-400 text-xs">{currentTierProgress().toFixed(1)}% COMPLETE</span>
+            </div>
+            <div className="w-full bg-slate-700 rounded-full h-3 border-2 border-slate-600 overflow-hidden">
+              <div 
+                className="h-full bg-gradient-to-r from-orange-400 to-yellow-400 transition-all duration-300"
+                style={{ width: `${currentTierProgress()}%` }}
+              />
+            </div>
+            <div className="flex justify-between text-xs mt-2">
+              <span className="font-pixel text-green-400">{tokensRemainingInTier()}B LEFT IN TIER</span>
+              <span className="font-pixel text-yellow-400">
+                {currentPrice ? formatEther(currentPrice as bigint).substring(0, 8) : '0.0005'} BNB
+              </span>
+            </div>
+          </div>
         </div>
+
+        {/* Bonding Curve Visualization */}
+        <BondingCurve className="mb-12" />
 
         {/* Buy Section */}
         <div className="card-pixel bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-md rounded-2xl p-8 border-cyan-500">

@@ -60,8 +60,8 @@ const Hero = () => {
 
           {/* Right Side - Hero Content */}
           <div className="text-center lg:text-left order-1 lg:order-2">
-            <h1 className="heading-pixel text-3xl sm:text-5xl lg:text-7xl text-white mb-4 sm:mb-6 leading-tight text-pixel-shadow">
-              <span className="bg-gradient-to-r from-orange-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent">
+            <h1 className="heading-pixel text-3xl sm:text-5xl lg:text-7xl mb-4 sm:mb-6 leading-tight text-pixel-shadow">
+              <span className="text-orange-400 text-pixel-glow">
                 THE MEME TREASURY
               </span>
             </h1>

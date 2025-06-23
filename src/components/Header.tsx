@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Wallet } from 'lucide-react';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
+  const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -156,7 +158,10 @@ const Header = () => {
           </div>
 
           {/* Existing Join Presale Button (Desktop) */}
-          <button className="hidden md:flex btn-pixel bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white border-orange-700 px-3 lg:px-4 py-2 text-xs items-center space-x-2">
+          <button 
+            onClick={() => navigate('/presale')}
+            className="hidden md:flex btn-pixel bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white border-orange-700 px-3 lg:px-4 py-2 text-xs items-center space-x-2 hover:scale-105 transition-all duration-300"
+          >
             <Wallet size={14} />
             <span className="hidden lg:inline">JOIN PRESALE</span>
             <span className="lg:hidden">JOIN</span>
@@ -279,7 +284,13 @@ const Header = () => {
                   }}
                 </ConnectButton.Custom>
               </div>
-              <button className="btn-pixel bg-gradient-to-r from-orange-500 to-orange-600 text-white border-orange-700 px-4 py-3 text-xs w-full flex items-center justify-center space-x-2 mt-2">
+              <button 
+                onClick={() => {
+                  navigate('/presale');
+                  setIsMobileMenuOpen(false);
+                }}
+                className="btn-pixel bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white border-orange-700 px-4 py-3 text-xs w-full flex items-center justify-center space-x-2 mt-2 hover:scale-105 transition-all duration-300"
+              >
                 <Wallet size={14} />
                 <span>JOIN PRESALE</span>
               </button>
