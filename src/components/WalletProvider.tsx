@@ -1,14 +1,14 @@
 import React from 'react';
 import { getDefaultConfig, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { WagmiProvider } from 'wagmi';
-import { bsc } from 'wagmi/chains';
+import { bscTestnet } from 'wagmi/chains';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import '@rainbow-me/rainbowkit/styles.css';
 
 const config = getDefaultConfig({
   appName: 'SULTANX',
   projectId: 'dc7cefb3f31a907c65aa2d2906f7e581',
-  chains: [bsc],
+  chains: [bscTestnet],
 });
 
 const queryClient = new QueryClient();
