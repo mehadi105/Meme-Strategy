@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Wallet } from 'lucide-react';
-import { walletManager } from '../utils/wallet';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [wallet, setWallet] = useState(walletManager.getState());
-  const [connecting, setConnecting] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -14,12 +12,6 @@ const Header = () => {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const unsub = walletManager.subscribe(setWallet);
-    walletManager.checkConnection();
-    return unsub;
   }, []);
 
   const scrollToSection = (sectionId: string) => {
@@ -30,10 +22,9 @@ const Header = () => {
     setIsMobileMenuOpen(false);
   };
 
-  const handleConnectWallet = async () => {
-    setConnecting(true);
-    await walletManager.connect();
-    setConnecting(false);
+  const getShortAddress = (address: string): string => {
+    if (!address) return '';
+    return `${address.slice(0, 6)}...${address.slice(-4)}`;
   };
 
   return (
@@ -66,20 +57,103 @@ const Header = () => {
           </nav>
 
           {/* Connect Wallet Button (Desktop) */}
-          <button
-            className="hidden md:flex btn-pixel bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-blue-600 hover:to-cyan-700 text-white border-cyan-700 px-3 lg:px-4 py-2 text-xs items-center space-x-2 ml-4"
-            onClick={handleConnectWallet}
-            disabled={wallet.isConnected || connecting}
-          >
-            <Wallet size={14} />
-            <span>
-              {wallet.isConnected
-                ? walletManager.getShortAddress(wallet.account || '')
-                : connecting
-                  ? 'Connecting...'
-                  : 'Connect Wallet'}
-            </span>
-          </button>
+          <div className="hidden md:flex">
+            <ConnectButton.Custom>
+              {({
+                account,
+                chain,
+                openAccountModal,
+                openChainModal,
+                openConnectModal,
+                mounted,
+              }) => {
+                const ready = mounted;
+                const connected = ready && account && chain;
+
+                return (
+                  <div
+                    {...(!ready && {
+                      'aria-hidden': true,
+                      'style': {
+                        opacity: 0,
+                        pointerEvents: 'none',
+                        userSelect: 'none',
+                      },
+                    })}
+                  >
+                    {(() => {
+                      if (!connected) {
+                        return (
+                          <button
+                            onClick={openConnectModal}
+                            type="button"
+                            className="btn-pixel bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-blue-600 hover:to-cyan-700 text-white border-cyan-700 px-3 lg:px-4 py-2 text-xs items-center space-x-2 ml-4 flex"
+                          >
+                            <Wallet size={14} />
+                            <span>Connect Wallet</span>
+                          </button>
+                        );
+                      }
+
+                      if (chain.unsupported) {
+                        return (
+                          <button
+                            onClick={openChainModal}
+                            type="button"
+                            className="btn-pixel bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white border-red-700 px-3 lg:px-4 py-2 text-xs items-center space-x-2 ml-4 flex"
+                          >
+                            <Wallet size={14} />
+                            <span>Wrong network</span>
+                          </button>
+                        );
+                      }
+
+                      return (
+                        <div className="flex items-center space-x-2 ml-4">
+                          <button
+                            onClick={openChainModal}
+                            type="button"
+                            className="btn-pixel bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white border-green-700 px-2 py-2 text-xs flex items-center"
+                          >
+                            {chain.hasIcon && (
+                              <div
+                                style={{
+                                  background: chain.iconBackground,
+                                  width: 12,
+                                  height: 12,
+                                  borderRadius: 999,
+                                  overflow: 'hidden',
+                                  marginRight: 4,
+                                }}
+                              >
+                                {chain.iconUrl && (
+                                  <img
+                                    alt={chain.name ?? 'Chain icon'}
+                                    src={chain.iconUrl}
+                                    style={{ width: 12, height: 12 }}
+                                  />
+                                )}
+                              </div>
+                            )}
+                            {chain.name}
+                          </button>
+
+                          <button
+                            onClick={openAccountModal}
+                            type="button"
+                            className="btn-pixel bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-blue-600 hover:to-cyan-700 text-white border-cyan-700 px-3 lg:px-4 py-2 text-xs items-center space-x-2 flex"
+                          >
+                            <Wallet size={14} />
+                            <span>{getShortAddress(account.address)}</span>
+                          </button>
+                        </div>
+                      );
+                    })()}
+                  </div>
+                );
+              }}
+            </ConnectButton.Custom>
+          </div>
 
           {/* Existing Join Presale Button (Desktop) */}
           <button className="hidden md:flex btn-pixel bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white border-orange-700 px-3 lg:px-4 py-2 text-xs items-center space-x-2">
@@ -110,28 +184,106 @@ const Header = () => {
                   {item}
                 </button>
               ))}
-              <button
-                className="btn-pixel bg-gradient-to-r from-cyan-500 to-blue-500 text-white border-cyan-700 px-4 py-3 text-xs w-full flex items-center justify-center space-x-2 mt-2"
-                onClick={handleConnectWallet}
-                disabled={wallet.isConnected || connecting}
-              >
-                <Wallet size={14} />
-                <span>
-                  {wallet.isConnected
-                    ? walletManager.getShortAddress(wallet.account || '')
-                    : connecting
-                      ? 'Connecting...'
-                      : 'Connect Wallet'}
-                </span>
-              </button>
+              <div className="mt-2">
+                <ConnectButton.Custom>
+                  {({
+                    account,
+                    chain,
+                    openAccountModal,
+                    openChainModal,
+                    openConnectModal,
+                    mounted,
+                  }) => {
+                    const ready = mounted;
+                    const connected = ready && account && chain;
+
+                    return (
+                      <div
+                        {...(!ready && {
+                          'aria-hidden': true,
+                          'style': {
+                            opacity: 0,
+                            pointerEvents: 'none',
+                            userSelect: 'none',
+                          },
+                        })}
+                      >
+                        {(() => {
+                          if (!connected) {
+                            return (
+                              <button
+                                onClick={openConnectModal}
+                                type="button"
+                                className="btn-pixel bg-gradient-to-r from-cyan-500 to-blue-500 text-white border-cyan-700 px-4 py-3 text-xs w-full flex items-center justify-center space-x-2"
+                              >
+                                <Wallet size={14} />
+                                <span>Connect Wallet</span>
+                              </button>
+                            );
+                          }
+
+                          if (chain.unsupported) {
+                            return (
+                              <button
+                                onClick={openChainModal}
+                                type="button"
+                                className="btn-pixel bg-gradient-to-r from-red-500 to-red-600 text-white border-red-700 px-4 py-3 text-xs w-full flex items-center justify-center space-x-2"
+                              >
+                                <Wallet size={14} />
+                                <span>Wrong network</span>
+                              </button>
+                            );
+                          }
+
+                          return (
+                            <div className="space-y-2">
+                              <button
+                                onClick={openChainModal}
+                                type="button"
+                                className="btn-pixel bg-gradient-to-r from-green-500 to-green-600 text-white border-green-700 px-4 py-3 text-xs w-full flex items-center justify-center space-x-2"
+                              >
+                                {chain.hasIcon && (
+                                  <div
+                                    style={{
+                                      background: chain.iconBackground,
+                                      width: 12,
+                                      height: 12,
+                                      borderRadius: 999,
+                                      overflow: 'hidden',
+                                    }}
+                                  >
+                                    {chain.iconUrl && (
+                                      <img
+                                        alt={chain.name ?? 'Chain icon'}
+                                        src={chain.iconUrl}
+                                        style={{ width: 12, height: 12 }}
+                                      />
+                                    )}
+                                  </div>
+                                )}
+                                <span>{chain.name}</span>
+                              </button>
+                              <button
+                                onClick={openAccountModal}
+                                type="button"
+                                className="btn-pixel bg-gradient-to-r from-cyan-500 to-blue-500 text-white border-cyan-700 px-4 py-3 text-xs w-full flex items-center justify-center space-x-2"
+                              >
+                                <Wallet size={14} />
+                                <span>{getShortAddress(account.address)}</span>
+                              </button>
+                            </div>
+                          );
+                        })()}
+                      </div>
+                    );
+                  }}
+                </ConnectButton.Custom>
+              </div>
               <button className="btn-pixel bg-gradient-to-r from-orange-500 to-orange-600 text-white border-orange-700 px-4 py-3 text-xs w-full flex items-center justify-center space-x-2 mt-2">
                 <Wallet size={14} />
                 <span>JOIN PRESALE</span>
               </button>
             </nav>
-            {wallet.error && (
-              <div className="text-xs text-red-400 mt-2 text-center w-full">{wallet.error}</div>
-            )}
           </div>
         )}
       </div>
