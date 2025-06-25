@@ -1,0 +1,27 @@
+ 
+ Steps to Approve Your Presale Contract from a Gnosis Safe
+1. Access the Gnosis Safe Interface:
+    * Go to https://app.safe.global and connect your wallet.
+    * Open your client's Safe (the one that holds the tokens).
+2. Ensure the Safe holds the required tokens:
+    * The ERC-20 tokens must be present in this Safe.
+3. Prepare the Approval Transaction:
+    * You’ll approve the Presale contract to spend tokens on behalf of the Safe.
+4. Use this function from the token contract:function approve(address spender, uint256 amount) external returns (bool);
+5. 
+    * spender = address of your presale contract
+    * amount = total tokens the contract may transfer (e.g. 3.5B * 1e18)
+6. Create a Custom Transaction in Gnosis Safe:
+    * Click "New Transaction" > "Contract Interaction"
+    * Paste your token contract address
+    * It will auto-detect the ABI, or you can enter it manually
+    * Choose the approve function
+    * Enter:
+        * spender: your Presale contract address
+        * amount: 3500000000 * 1e18 (or use a calculator and input the number directly)
+7. Submit and Execute the Transaction:
+    * The Safe owners will need to confirm the transaction (depending on the threshold).
+    * Once confirmed, the presale contract will be able to transfer tokens from the Safe.
+
+ Presale contract : (0xe8BF621BAf230FB3B15A07ACF9103Ff9Ba60efAA)   amount:   (3500000000000000000000000000)
+

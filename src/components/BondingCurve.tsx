@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useReadContract, useWatchContractEvent } from 'wagmi';
 import { formatEther } from 'viem';
 
-const PRESALE_ADDRESS = '0x52b8dD7253BE47f3076b918800b96797a45c8795' as const;
+const PRESALE_ADDRESS = '0xe8BF621BAf230FB3B15A07ACF9103Ff9Ba60efAA' as const;
 
 const PRESALE_ABI = [
   {
@@ -15,6 +15,13 @@ const PRESALE_ABI = [
   {
     "inputs": [],
     "name": "nextPrice",
+    "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "bondingPrice",
     "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
     "stateMutability": "view",
     "type": "function"
@@ -86,7 +93,7 @@ export default function BondingCurve({ width = 800, height = 400, className = ""
   const { data: currentPrice, refetch: refetchPrice } = useReadContract({
     address: PRESALE_ADDRESS,
     abi: PRESALE_ABI,
-    functionName: 'nextPrice',
+    functionName: 'bondingPrice',
     query: { refetchInterval: 3000 },
   });
 
@@ -193,7 +200,6 @@ export default function BondingCurve({ width = 800, height = 400, className = ""
     let path = `M ${points[0].x} ${points[0].y}`;
     
     for (let i = 1; i < points.length; i++) {
-      const _prev = points[i - 1];
       const current = points[i];
       const next = points[i + 1];
       

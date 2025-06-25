@@ -128,7 +128,7 @@ const HowToBuy = () => {
   ];
 
   const contractInfo = {
-    presale: "0x52b8dD7253BE47f3076b918800b96797a45c8795",
+    presale: "0xe8BF621BAf230FB3B15A07ACF9103Ff9Ba60efAA",
     token: "0x78e3efa2450239561F204D937F6A5a5f95DE5a06",
     network: "BSC Mainnet",
     chainId: "56"
