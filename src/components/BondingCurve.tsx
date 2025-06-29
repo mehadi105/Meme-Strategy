@@ -289,7 +289,7 @@ export default function BondingCurve({ width = 800, height = 400, className = ""
           <span className={`font-pixel text-xs ${freshness.color}`}>
             {freshness.status}
           </span>
-          <span className="font-pixel text-gray-500 text-xs ml-2">
+          <span className="font-pixel text-blue-300 text-xs ml-2">
             {Math.floor((currentTime - lastUpdate) / 1000)}s
           </span>
         </div>
@@ -461,15 +461,15 @@ export default function BondingCurve({ width = 800, height = 400, className = ""
       <div className="flex justify-center items-center gap-6 mt-4">
         <div className="flex items-center gap-2">
           <div className="w-4 h-1 bg-gradient-to-r from-green-400 to-cyan-400 rounded"></div>
-          <span className="font-pixel text-xs text-gray-400">PRICE CURVE</span>
+          <span className="font-pixel text-xs text-cyan-300">PRICE CURVE</span>
         </div>
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 bg-cyan-400 rounded-full"></div>
-          <span className="font-pixel text-xs text-gray-400">CURRENT POSITION</span>
+          <span className="font-pixel text-xs text-cyan-300">CURRENT POSITION</span>
         </div>
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
-          <span className="font-pixel text-xs text-gray-400">TIER MILESTONES</span>
+          <span className="font-pixel text-xs text-cyan-300">TIER MILESTONES</span>
         </div>
       </div>
     </div>

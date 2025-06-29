@@ -32,7 +32,7 @@ const HowItWorks = () => {
                     }}
                   />
                 </div>
-                <div className="btn-pixel bg-gradient-to-r from-green-400 to-emerald-500 text-black border-green-600 px-2 sm:px-3 py-1 text-xs inline-block">
+                <div className="btn-pixel bg-gradient-to-r from-green-400 to-emerald-500 text-white border-green-600 px-2 sm:px-3 py-1 text-xs inline-block">
                   AUDITED & SECURED
                 </div>
               </div>
@@ -47,7 +47,7 @@ const HowItWorks = () => {
               ].map((item, index) => (
                 <div key={index} className="flex items-center space-x-2 sm:space-x-3" data-aos="slide-right" data-aos-delay={200 + index * 100}>
                   <item.icon className="text-green-400 flex-shrink-0" size={16} />
-                  <span className="font-pixel text-gray-300 text-xs">{item.text}</span>
+                  <span className="font-pixel text-cyan-300 text-xs">{item.text}</span>
                 </div>
               ))}
             </div>

@@ -16,7 +16,7 @@ const Hero = () => {
       <div className="container mx-auto px-4 sm:px-6 py-10 sm:py-20">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left Side - MEME STRATEGY Pixel Art */}
-          <div className="relative flex justify-center lg:justify-start order-2 lg:order-1">
+          <div className="relative flex justify-center lg:justify-end order-2 lg:order-2">
             <div className="card-pixel bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-8 border-cyan-500 shadow-2xl hover:scale-105 transition-all duration-500 w-full max-w-md">
               {/* Main MEME STRATEGY Image */}
               <div className="text-center mb-6 sm:mb-8">
@@ -59,7 +59,7 @@ const Hero = () => {
           </div>
 
           {/* Right Side - Hero Content */}
-          <div className="text-center lg:text-left order-1 lg:order-2">
+          <div className="text-center lg:text-left order-1 lg:order-1">
             <h1 className="heading-pixel text-3xl sm:text-5xl lg:text-7xl mb-4 sm:mb-6 leading-tight text-pixel-shadow">
               <span className="text-orange-400 text-pixel-glow">
                 THE MEME TREASURY
@@ -70,11 +70,11 @@ const Hero = () => {
               BACKED BY <span className="text-yellow-400 text-pixel-glow">BITCOIN</span>
             </h2>
             
-            <p className="font-pixel text-sm sm:text-xl lg:text-2xl text-gray-300 mb-6 sm:mb-8 leading-relaxed px-4 lg:px-0">
+            <p className="font-pixel text-sm sm:text-xl lg:text-2xl text-cyan-300 mb-6 sm:mb-8 leading-relaxed px-4 lg:px-0">
               WE DON'T JUST INVEST IN MEMES. WE BECOME THE MEME.
             </p>
             
-            <p className="font-retro text-gray-400 mb-8 sm:mb-12 text-sm sm:text-lg leading-relaxed max-w-lg mx-auto lg:mx-0 px-4 lg:px-0">
+            <p className="font-retro text-blue-300 mb-8 sm:mb-12 text-sm sm:text-lg leading-relaxed max-w-lg mx-auto lg:mx-0 px-4 lg:px-0">
               JOIN THE PRESALE AND HELP BUILD CRYPTO'S FIRST DECENTRALIZED, CULTURE-POWERED TREASURY.
             </p>
 
@@ -103,7 +103,7 @@ const Hero = () => {
                   </div>
                   <div>
                     <div className="font-pixel text-white text-xs">MEMEBOT AI</div>
-                    <div className="font-pixel text-gray-400 text-xs">POWERED FOUNDER</div>
+                    <div className="font-pixel text-cyan-300 text-xs">POWERED FOUNDER</div>
                   </div>
                 </div>
               </div>
@@ -115,7 +115,7 @@ const Hero = () => {
                   </div>
                   <div>
                     <div className="font-pixel text-white text-xs">BITCOIN BACKED</div>
-                    <div className="font-pixel text-gray-400 text-xs">TREASURY ANCHOR</div>
+                    <div className="font-pixel text-cyan-300 text-xs">TREASURY ANCHOR</div>
                   </div>
                 </div>
               </div>
@@ -137,7 +137,7 @@ const Hero = () => {
                   <stat.icon className={`w-4 h-4 sm:w-6 sm:h-6 bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`} />
                   <span className="font-pixel text-green-400 text-xs">{stat.change}</span>
                 </div>
-                <div className="font-pixel text-gray-400 text-xs mb-1">{stat.label}</div>
+                <div className="font-pixel text-blue-300 text-xs mb-1">{stat.label}</div>
                 <div className="heading-pixel text-white text-sm sm:text-xl text-pixel-glow">{stat.value}</div>
               </div>
             ))}

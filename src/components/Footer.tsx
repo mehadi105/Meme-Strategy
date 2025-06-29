@@ -7,14 +7,14 @@ const Footer = () => {
           <div className="text-center lg:text-left">
             <div className="flex items-center justify-center lg:justify-start space-x-2 mb-3 sm:mb-4">
               <div className="relative">
-                <span className="font-pixel text-lg sm:text-2xl text-white text-pixel-glow">MS</span>
+                <span className="font-pixel text-lg sm:text-2xl text-white text-pixel-glow">M{'>'}</span>
                 <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-orange-500 to-pink-500"></div>
               </div>
               <span className="font-retro text-white text-sm sm:text-lg">MEMESTRATEGY</span>
             </div>
             <div className="flex flex-wrap justify-center lg:justify-start gap-4 sm:gap-6 text-sm">
               {['TERMS OF SERVICE', 'PRIVACY POLICY', 'FAQ'].map((link, index) => (
-                <a key={index} href={link === 'FAQ' ? '#faq' : '#'} className="font-pixel text-gray-400 hover:text-white transition-colors duration-300 text-xs">
+                <a key={index} href={link === 'FAQ' ? '#faq' : '#'} className="font-pixel text-cyan-300 hover:text-white transition-colors duration-300 text-xs">
                   {link}
                 </a>
               ))}
@@ -35,7 +35,7 @@ const Footer = () => {
           {/* Right - Stay Connected */}
           <div className="text-center lg:text-right">
             <h3 className="heading-pixel text-white mb-2 text-xs sm:text-sm">STAY CONNECTED</h3>
-            <p className="font-pixel text-gray-400 text-xs mb-3 sm:mb-4">FOLLOW @MEMESTRATEGY ON X</p>
+            <p className="font-pixel text-blue-300 text-xs mb-3 sm:mb-4">FOLLOW @MEMESTRATEGY ON X</p>
             <div className="space-y-1 sm:space-y-2 text-sm">
               {[
                 'JOIN THE TELEGRAM',

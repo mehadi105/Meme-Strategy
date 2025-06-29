@@ -38,7 +38,7 @@ const Header = () => {
           {/* Logo */}
           <div className="flex items-center space-x-2 sm:space-x-3">
             <div className="relative">
-              <span className="font-pixel text-lg sm:text-2xl text-white text-pixel-glow">MS</span>
+              <span className="font-pixel text-lg sm:text-2xl text-white text-pixel-glow">M{'>'}</span>
               <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-orange-500 to-pink-500"></div>
             </div>
             <span className="font-retro text-white font-black text-sm sm:text-lg">MEMESTRATEGY</span>

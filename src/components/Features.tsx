@@ -29,7 +29,7 @@ const Features = () => {
           <h2 className="heading-pixel text-2xl sm:text-4xl lg:text-5xl text-white mb-4 sm:mb-6 text-pixel-shadow px-4">
             COMMUNITY + <span className="bg-gradient-to-r from-orange-400 to-pink-500 bg-clip-text text-transparent">UTILITY</span>
           </h2>
-          <p className="font-pixel text-sm sm:text-xl text-gray-300 mb-6 sm:mb-8 px-4">
+          <p className="font-pixel text-sm sm:text-xl text-cyan-300 mb-6 sm:mb-8 px-4">
             YOUR MEMES. YOUR TREASURY. YOUR MOVEMENT.
           </p>
         </div>
@@ -44,7 +44,7 @@ const Features = () => {
                 <h3 className="heading-pixel text-sm sm:text-xl text-white mb-2 sm:mb-3 text-pixel-glow px-2">
                   {feature.title}
                 </h3>
-                <p className="font-pixel text-gray-400 leading-relaxed text-xs px-2">
+                <p className="font-pixel text-blue-300 leading-relaxed text-xs px-2">
                   {feature.description}
                 </p>
               </div>
@@ -60,7 +60,7 @@ const Features = () => {
                 </div>
                 <div className="space-y-2">
                   <div className="flex justify-between">
-                    <span className="font-pixel text-gray-400 text-xs">PARTICIPATION</span>
+                    <span className="font-pixel text-cyan-300 text-xs">PARTICIPATION</span>
                     <span className="font-pixel text-green-400 text-xs">{Math.floor(Math.random() * 30 + 70)}%</span>
                   </div>
                   <div className="w-full bg-slate-700 rounded-full h-2 sm:h-3 border-2 border-slate-600">
@@ -90,7 +90,7 @@ const Features = () => {
               ].map((item, index) => (
                 <div key={index} className="flex items-center space-x-2 sm:space-x-3" data-aos="fade-right" data-aos-delay={1200 + index * 100}>
                   <item.icon className="text-orange-400 flex-shrink-0" size={16} />
-                  <span className="font-pixel text-gray-300 text-xs">{item.text}</span>
+                                      <span className="font-pixel text-cyan-300 text-xs">{item.text}</span>
                 </div>
               ))}
             </div>
@@ -105,7 +105,7 @@ const Features = () => {
                   { label: 'STRATEGIST ROLES', status: '✓ DISCORD', color: 'text-cyan-400' }
                 ].map((utility, index) => (
                   <div key={index} className="flex justify-between" data-aos="fade-up" data-aos-delay={1400 + index * 100}>
-                    <span className="font-pixel text-gray-400 text-xs">{utility.label}</span>
+                    <span className="font-pixel text-blue-300 text-xs">{utility.label}</span>
                     <span className={`font-pixel text-xs ${utility.color}`}>{utility.status}</span>
                   </div>
                 ))}

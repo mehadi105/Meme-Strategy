@@ -64,7 +64,7 @@ const Roadmap = () => {
           <h2 className="heading-pixel text-2xl sm:text-4xl lg:text-5xl text-white mb-4 sm:mb-6 text-pixel-shadow px-4">
             <span className="bg-gradient-to-r from-orange-400 to-pink-500 bg-clip-text text-transparent">ROADMAP</span>
           </h2>
-          <p className="font-pixel text-sm sm:text-xl text-gray-300 mb-6 sm:mb-8 px-4">
+          <p className="font-pixel text-sm sm:text-xl text-cyan-300 mb-6 sm:mb-8 px-4">
             OUR JOURNEY TO MEME TREASURY SUPREMACY
           </p>
         </div>
@@ -96,7 +96,7 @@ const Roadmap = () => {
                   <div className="card-pixel bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-8 border-cyan-500 hover:border-cyan-400 transition-all duration-500 hover:scale-105">
                     <div className="flex items-center justify-between mb-4 sm:mb-6">
                       <div>
-                        <div className="font-pixel text-gray-400 text-xs mb-1">{phase.phase}</div>
+                        <div className="font-pixel text-blue-300 text-xs mb-1">{phase.phase}</div>
                         <h3 className="heading-pixel text-lg sm:text-2xl text-white text-pixel-glow">{phase.title}</h3>
                       </div>
                       {getStatusIcon(phase.status)}
@@ -121,7 +121,7 @@ const Roadmap = () => {
                       {phase.items.map((item, itemIndex) => (
                         <div key={itemIndex} className="flex items-center space-x-2 sm:space-x-3">
                           <div className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full border-2 ${phase.status === 'completed' ? 'bg-green-400 border-green-600' : phase.status === 'current' ? 'bg-orange-400 border-orange-600 animate-pulse' : 'bg-purple-400 border-purple-600'}`}></div>
-                          <span className="font-pixel text-gray-300 text-xs">{item}</span>
+                          <span className="font-pixel text-cyan-300 text-xs">{item}</span>
                         </div>
                       ))}
                     </div>
@@ -129,7 +129,7 @@ const Roadmap = () => {
                     {/* Progress Bar */}
                     <div className="mt-4 sm:mt-6">
                       <div className="flex justify-between items-center mb-2">
-                        <span className="font-pixel text-gray-400 text-xs">PROGRESS</span>
+                        <span className="font-pixel text-blue-300 text-xs">PROGRESS</span>
                         <span className="font-pixel text-white text-xs">
                           {phase.status === 'completed' ? '100%' : phase.status === 'current' ? '25%' : '0%'}
                         </span>
@@ -173,7 +173,7 @@ const Roadmap = () => {
                       />
                     </div>
                     <h4 className="heading-pixel text-white text-xs sm:text-sm mb-2">{phase.phase}</h4>
-                    <p className="font-pixel text-gray-400 text-xs">{phase.title}</p>
+                    <p className="font-pixel text-cyan-300 text-xs">{phase.title}</p>
                   </div>
                 </div>
               ))}
@@ -190,7 +190,7 @@ const Roadmap = () => {
             <h3 className="heading-pixel text-xl sm:text-3xl text-white mb-3 sm:mb-4 text-pixel-shadow px-4">
               JOIN THE <span className="bg-gradient-to-r from-orange-400 to-pink-500 bg-clip-text text-transparent">MEME TREASURY</span>
             </h3>
-            <p className="font-pixel text-gray-300 mb-4 sm:mb-6 leading-relaxed text-xs sm:text-sm px-4">
+            <p className="font-pixel text-cyan-300 mb-4 sm:mb-6 leading-relaxed text-xs sm:text-sm px-4">
               BE PART OF THE FUTURE OF MEME INVESTING. GET IN EARLY AND HELP SHAPE CRYPTO CULTURE.
             </p>
             <button 
