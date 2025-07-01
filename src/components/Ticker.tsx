@@ -77,19 +77,19 @@ const Ticker: React.FC<TickerProps> = ({ position }) => {
       console.error('Error fetching cryptocurrency prices:', error);
       // Fallback to static data if API fails
       const fallbackData: CoinData[] = [
-        { symbol: 'BTC', price: '$97,234', change: '+2.34%', trend: 'up' },
-        { symbol: 'ETH', price: '$3,456', change: '+1.87%', trend: 'up' },
-        { symbol: 'DOGE', price: '$0.404', change: '+3.98%', trend: 'up' },
+    { symbol: 'BTC', price: '$97,234', change: '+2.34%', trend: 'up' },
+    { symbol: 'ETH', price: '$3,456', change: '+1.87%', trend: 'up' },
+    { symbol: 'DOGE', price: '$0.404', change: '+3.98%', trend: 'up' },
         { symbol: 'PEPE', price: '$0.000011', change: '+7.98%', trend: 'up' },
         { symbol: 'SHIB', price: '$0.000014', change: '-1.98%', trend: 'down' },
-        { symbol: 'WIF', price: '$1.332', change: '+9.98%', trend: 'up' },
+    { symbol: 'WIF', price: '$1.332', change: '+9.98%', trend: 'up' },
         { symbol: 'BONK', price: '$0.000002', change: '+11.98%', trend: 'up' },
         { symbol: 'FLOKI', price: '$0.000001', change: '-8.98%', trend: 'down' },
-        { symbol: 'SOL', price: '$234.56', change: '+4.23%', trend: 'up' },
-        { symbol: 'BNB', price: '$678.90', change: '+2.15%', trend: 'up' },
-        { symbol: 'USDT', price: '$1.00', change: '0.00%', trend: 'neutral' },
-        { symbol: 'USDC', price: '$1.00', change: '0.00%', trend: 'neutral' }
-      ];
+    { symbol: 'SOL', price: '$234.56', change: '+4.23%', trend: 'up' },
+    { symbol: 'BNB', price: '$678.90', change: '+2.15%', trend: 'up' },
+    { symbol: 'USDT', price: '$1.00', change: '0.00%', trend: 'neutral' },
+    { symbol: 'USDC', price: '$1.00', change: '0.00%', trend: 'neutral' }
+  ];
       setTickerData(fallbackData);
       setIsLoading(false);
     }

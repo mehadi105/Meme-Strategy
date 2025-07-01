@@ -39,7 +39,7 @@ const Header = () => {
           <div className="flex items-center space-x-2 sm:space-x-3">
             <div className="relative">
               <span className="font-pixel text-lg sm:text-2xl text-white text-pixel-glow">M{'>'}</span>
-              <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-orange-500 to-pink-500"></div>
+              <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-orange-500 to-cyan-400"></div>
             </div>
             <span className="font-retro text-white font-black text-sm sm:text-lg">MEMESTRATEGY</span>
           </div>
@@ -50,10 +50,10 @@ const Header = () => {
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase())}
-                className="font-pixel text-white hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-pink-400 hover:to-cyan-400 transition-all duration-300 text-xs relative group"
+                className="font-pixel text-white hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-orange-400 hover:to-cyan-400 transition-all duration-300 text-xs relative group"
               >
                 {item}
-                <div className="absolute -bottom-1 left-0 w-0 h-1 bg-gradient-to-r from-pink-400 to-cyan-400 group-hover:w-full transition-all duration-300"></div>
+                <div className="absolute -bottom-1 left-0 w-0 h-1 bg-gradient-to-r from-orange-400 to-cyan-400 group-hover:w-full transition-all duration-300"></div>
               </button>
             ))}
           </nav>

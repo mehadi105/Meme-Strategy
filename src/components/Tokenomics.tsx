@@ -47,7 +47,7 @@ const Tokenomics = () => {
       <div className="container mx-auto px-4 sm:px-6">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="heading-pixel text-2xl sm:text-4xl lg:text-5xl text-white mb-4 sm:mb-6 text-pixel-shadow px-4">
-            <span className="bg-gradient-to-r from-orange-400 to-pink-500 bg-clip-text text-transparent">$MSTR</span> TOKENOMICS
+            <span className="text-orange-400 text-pixel-glow">$MSTR</span> <span className="text-cyan-400 text-pixel-glow">TOKENOMICS</span>
           </h2>
           <p className="font-pixel text-sm sm:text-xl text-cyan-300 mb-6 sm:mb-8 px-4">
             HOW WE DISTRIBUTE 10 BILLION $MSTR TOKENS
@@ -116,7 +116,7 @@ const Tokenomics = () => {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3 sm:space-x-4">
                     {item.icon ? (
-                      <div className={`w-8 h-8 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center border-2 border-black`}>
+                      <div className={`w-8 h-8 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center border-2 border-slate-700`}>
                         <item.icon className="text-white" size={16} />
                       </div>
                     ) : null}
@@ -173,7 +173,7 @@ const Tokenomics = () => {
                       d={`M 100 100 L ${startX} ${startY} A 80 80 0 ${largeArcFlag} 1 ${endX} ${endY} Z`}
                       fill={`url(#gradient-${index})`}
                       className="hover:opacity-80 transition-opacity duration-300"
-                      stroke="#000"
+                      stroke="#334155"
                       strokeWidth="3"
                     />
                   );
@@ -209,7 +209,7 @@ const Tokenomics = () => {
             <div className="grid grid-cols-2 gap-3 sm:gap-4 w-full">
               {tokenomicsData.map((item, index) => (
                 <div key={index} className="flex items-center space-x-2">
-                  <div className={`w-3 h-3 sm:w-4 sm:h-4 rounded bg-gradient-to-br ${item.color} border border-black`}></div>
+                  <div className={`w-3 h-3 sm:w-4 sm:h-4 rounded bg-gradient-to-br ${item.color} border border-slate-700`}></div>
                   <span className="font-pixel text-gray-300 text-xs">{item.title}</span>
                 </div>
               ))}
@@ -265,7 +265,7 @@ const Tokenomics = () => {
         <div className="mt-12 sm:mt-16">
           <div className="card-pixel bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-8 border-orange-500">
             <h3 className="heading-pixel text-xl sm:text-3xl text-white mb-6 sm:mb-8 text-center text-pixel-shadow px-4">
-              WHY OUR <span className="bg-gradient-to-r from-orange-400 to-pink-500 bg-clip-text text-transparent">TOKENOMICS</span> WORK
+              WHY OUR <span className="text-orange-400 text-pixel-glow">TOKENOMICS</span> WORK
             </h3>
             
             <div className="grid md:grid-cols-2 gap-6 sm:gap-8">

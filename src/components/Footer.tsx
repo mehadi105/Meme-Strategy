@@ -8,7 +8,7 @@ const Footer = () => {
             <div className="flex items-center justify-center lg:justify-start space-x-2 mb-3 sm:mb-4">
               <div className="relative">
                 <span className="font-pixel text-lg sm:text-2xl text-white text-pixel-glow">M{'>'}</span>
-                <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-orange-500 to-pink-500"></div>
+                <div className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-orange-500 to-cyan-400"></div>
               </div>
               <span className="font-retro text-white text-sm sm:text-lg">MEMESTRATEGY</span>
             </div>

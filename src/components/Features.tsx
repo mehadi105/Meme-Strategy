@@ -18,7 +18,7 @@ const Features = () => {
       icon: Shield,
       title: 'TRANSPARENT TREASURY',
       description: 'Real-time dashboard showing all treasury holdings and performance metrics.',
-      gradient: 'from-pink-500 to-purple-500'
+      gradient: 'from-orange-500 to-red-500'
     }
   ];
 
@@ -27,7 +27,7 @@ const Features = () => {
       <div className="container mx-auto px-4 sm:px-6">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="heading-pixel text-2xl sm:text-4xl lg:text-5xl text-white mb-4 sm:mb-6 text-pixel-shadow px-4">
-            COMMUNITY + <span className="bg-gradient-to-r from-orange-400 to-pink-500 bg-clip-text text-transparent">UTILITY</span>
+            COMMUNITY + <span className="text-orange-400 text-pixel-glow">UTILITY</span>
           </h2>
           <p className="font-pixel text-sm sm:text-xl text-cyan-300 mb-6 sm:mb-8 px-4">
             YOUR MEMES. YOUR TREASURY. YOUR MOVEMENT.
@@ -76,8 +76,8 @@ const Features = () => {
         <div className="card-pixel bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-8 border-orange-500 relative overflow-hidden pixel-border">
           <div className="pixel-border-side pixel-border-left"></div>
           <div className="pixel-border-side pixel-border-right"></div>
-          <h3 className="heading-pixel text-xl sm:text-3xl text-white mb-6 sm:mb-8 text-center text-pixel-shadow px-4 relative z-10">
-            WHY <span className="bg-gradient-to-r from-orange-400 to-pink-500 bg-clip-text text-transparent">JOIN?</span>
+          <h3 className="heading-pixel text-lg sm:text-2xl text-white mb-6 sm:mb-8 text-pixel-shadow px-4">
+            WHY <span className="text-orange-400 text-pixel-glow">JOIN?</span>
           </h3>
           
           <div className="grid md:grid-cols-2 gap-6 sm:gap-8 relative z-10">

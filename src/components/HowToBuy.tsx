@@ -71,7 +71,7 @@ const HowToBuy = () => {
         "Tokens automatically sent to your wallet",
         "Add $MSTR token to wallet to view balance"
       ],
-      color: "from-fuchsia-500 to-pink-600",
+      color: "from-cyan-500 to-blue-600",
       borderColor: "border-fuchsia-500"
     }
   ];
@@ -165,7 +165,7 @@ const HowToBuy = () => {
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-20 left-10 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl animate-pulse"></div>
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-pink-400/10 rounded-full blur-3xl animate-pulse delay-500"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-cyan-400/10 rounded-full blur-3xl animate-pulse delay-500"></div>
         </div>
       </div>
 

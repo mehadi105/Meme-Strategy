@@ -14,7 +14,7 @@ const Stats = () => {
       <div className="container mx-auto px-4 sm:px-6">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="heading-pixel text-2xl sm:text-4xl lg:text-5xl text-white mb-4 sm:mb-6 text-pixel-shadow px-4">
-            WHAT IS <span className="bg-gradient-to-r from-orange-400 to-pink-500 bg-clip-text text-transparent">MEMESTRATEGY?</span>
+            WHAT IS <span className="text-orange-400 text-pixel-glow">MEMESTRATEGY?</span>
           </h2>
           <p className="font-pixel text-sm sm:text-xl text-gray-300 mb-6 sm:mb-8 px-4">
             THE FIRST TREASURY-BACKED MEMECOIN ECOSYSTEM ANCHORED WITH BITCOIN
@@ -26,7 +26,7 @@ const Stats = () => {
           <div className="card-pixel bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-8 border-cyan-500">
             <div className="text-center mb-6 sm:mb-8">
               <h3 className="heading-pixel text-lg sm:text-2xl text-white mb-3 sm:mb-4 text-pixel-glow px-4">
-                TOP MEME COINS <span className="bg-gradient-to-r from-orange-400 to-pink-500 bg-clip-text text-transparent">WE TRACK</span>
+                TOP MEME COINS <span className="text-cyan-400 text-pixel-glow">WE TRACK</span>
               </h3>
               <p className="font-pixel text-gray-300 text-xs sm:text-sm mb-4 sm:mb-6 px-4">
                 THESE ARE THE MEMECOINS OUR TREASURY INVESTS IN — VOTED BY THE COMMUNITY
@@ -119,7 +119,7 @@ const Stats = () => {
             <div className="space-y-4 sm:space-y-6">
               <div className="card-pixel bg-gradient-to-r from-slate-900/50 to-slate-800/50 rounded-lg sm:rounded-xl p-4 sm:p-6 border-orange-500">
                 <div className="flex items-center space-x-3 sm:space-x-4 mb-3 sm:mb-4">
-                  <div className="w-8 h-8 sm:w-12 sm:h-12 bg-gradient-to-br from-orange-400 to-pink-500 rounded-full flex items-center justify-center text-lg sm:text-2xl border-2 border-orange-600">
+                  <div className="w-8 h-8 sm:w-12 sm:h-12 bg-gradient-to-br from-orange-400 to-cyan-500 rounded-full flex items-center justify-center text-lg sm:text-2xl border-2 border-orange-600">
                     🐸
                   </div>
                   <div>
@@ -128,7 +128,7 @@ const Stats = () => {
                   </div>
                 </div>
                 <div className="w-full bg-slate-700 rounded-full h-3 sm:h-4 border-2 border-slate-600">
-                  <div className="bg-gradient-to-r from-orange-400 to-pink-500 h-full rounded-full w-[70%]"></div>
+                  <div className="bg-gradient-to-r from-orange-400 to-cyan-500 h-full rounded-full w-[70%]"></div>
                 </div>
               </div>
 
@@ -197,7 +197,7 @@ const Stats = () => {
         {/* Presale Information */}
         <div className="card-pixel bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-8 border-orange-500">
           <h3 className="heading-pixel text-xl sm:text-3xl text-white mb-6 sm:mb-8 text-center text-pixel-shadow px-4">
-            HOW THE <span className="bg-gradient-to-r from-orange-400 to-pink-500 bg-clip-text text-transparent">PRESALE</span> WORKS
+            HOW THE <span className="text-orange-400 text-pixel-glow">PRESALE</span> WORKS
           </h3>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">

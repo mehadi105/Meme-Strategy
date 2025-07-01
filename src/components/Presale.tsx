@@ -219,14 +219,14 @@ const PRESALE_ABI = [
 		"stateMutability": "view",
 		"type": "function"
 	},
-	{
-		"inputs": [],
-		"name": "buy",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
+  {
+    "inputs": [],
+    "name": "buy",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
 		"inputs": [
 			{
 				"internalType": "address",
@@ -234,11 +234,11 @@ const PRESALE_ABI = [
 				"type": "address"
 			}
 		],
-		"name": "buy",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
+    "name": "buy",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
 	{
 		"inputs": [],
 		"name": "buyerCount",
@@ -271,9 +271,9 @@ const PRESALE_ABI = [
 		"stateMutability": "view",
 		"type": "function"
 	},
-	{
-		"inputs": [],
-		"name": "currentTier",
+  {
+    "inputs": [],
+    "name": "currentTier",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -307,12 +307,12 @@ const PRESALE_ABI = [
 				"type": "bool"
 			}
 		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "nextPrice",
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "nextPrice",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -379,11 +379,11 @@ const PRESALE_ABI = [
 				"type": "bool"
 			}
 		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
 		"name": "priceSpread",
 		"outputs": [
 			{
@@ -411,11 +411,11 @@ const PRESALE_ABI = [
 				"type": "address"
 			}
 		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
 		"name": "renounceOwnership",
 		"outputs": [],
 		"stateMutability": "nonpayable",
@@ -457,11 +457,11 @@ const PRESALE_ABI = [
 				"type": "address"
 			}
 		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
 		"name": "token",
 		"outputs": [
 			{
@@ -470,11 +470,11 @@ const PRESALE_ABI = [
 				"type": "address"
 			}
 		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
 		"name": "totalRaised",
 		"outputs": [
 			{
@@ -483,11 +483,11 @@ const PRESALE_ABI = [
 				"type": "uint256"
 			}
 		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
 		"name": "totalSold",
 		"outputs": [
 			{
@@ -496,11 +496,11 @@ const PRESALE_ABI = [
 				"type": "uint256"
 			}
 		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
 			{
 				"internalType": "address",
 				"name": "newOwner",
@@ -522,7 +522,7 @@ const PRESALE_ABI = [
 	{
 		"stateMutability": "payable",
 		"type": "receive"
-	}
+  }
 ] as const;
 
 export default function Presale() {

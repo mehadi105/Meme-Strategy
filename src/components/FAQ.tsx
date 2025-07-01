@@ -40,7 +40,7 @@ const FAQ = () => {
       <div className="container mx-auto px-4 sm:px-6">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="heading-pixel text-2xl sm:text-4xl lg:text-5xl text-white mb-4 sm:mb-6 text-pixel-shadow px-4">
-            FREQUENTLY ASKED <span className="bg-gradient-to-r from-orange-400 to-pink-500 bg-clip-text text-transparent">QUESTIONS</span>
+            FREQUENTLY ASKED <span className="text-orange-400 text-pixel-glow">QUESTIONS</span>
           </h2>
           <p className="font-pixel text-sm sm:text-xl text-gray-300 mb-6 sm:mb-8 px-4">
             EVERYTHING YOU NEED TO KNOW ABOUT MEMESTRATEGY

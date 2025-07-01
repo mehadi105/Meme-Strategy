@@ -36,7 +36,7 @@ const Roadmap = () => {
       title: 'ECOSYSTEM EXPANSION',
       status: 'upcoming',
       gif: '/road-4.gif',
-      color: 'from-purple-500 to-pink-600',
+      color: 'from-orange-500 to-amber-600',
       items: [
         'VENTURES INCUBATOR ($40M)',
         'MEME ETF APP ($50M)',
@@ -62,7 +62,7 @@ const Roadmap = () => {
       <div className="container mx-auto px-4 sm:px-6">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="heading-pixel text-2xl sm:text-4xl lg:text-5xl text-white mb-4 sm:mb-6 text-pixel-shadow px-4">
-            <span className="bg-gradient-to-r from-orange-400 to-pink-500 bg-clip-text text-transparent">ROADMAP</span>
+            <span className="text-cyan-400 text-pixel-glow">ROADMAP</span>
           </h2>
           <p className="font-pixel text-sm sm:text-xl text-cyan-300 mb-6 sm:mb-8 px-4">
             OUR JOURNEY TO MEME TREASURY SUPREMACY
@@ -154,7 +154,7 @@ const Roadmap = () => {
         <div className="mt-12 sm:mt-20 text-center">
           <div className="card-pixel bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-8 border-cyan-500 max-w-4xl mx-auto">
             <h3 className="heading-pixel text-xl sm:text-3xl text-white mb-6 sm:mb-8 text-pixel-shadow px-4">
-              POWERED BY <span className="bg-gradient-to-r from-orange-400 to-pink-500 bg-clip-text text-transparent">PIXEL PERFECTION</span>
+              POWERED BY <span className="text-orange-400 text-pixel-glow">PIXEL PERFECTION</span>
             </h3>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-6 sm:mb-8">
@@ -188,7 +188,7 @@ const Roadmap = () => {
           <img src="/character-2.svg" alt="Character 2" className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 h-80 w-auto z-20" style={{transform: 'translateY(-50%)'}} />
           <div className="card-pixel bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-8 border-orange-500 hover:border-orange-400 transition-all duration-300 max-w-2xl mx-auto">
             <h3 className="heading-pixel text-xl sm:text-3xl text-white mb-3 sm:mb-4 text-pixel-shadow px-4">
-              JOIN THE <span className="bg-gradient-to-r from-orange-400 to-pink-500 bg-clip-text text-transparent">MEME TREASURY</span>
+              JOIN THE <span className="text-orange-400 text-pixel-glow">MEME TREASURY</span>
             </h3>
             <p className="font-pixel text-cyan-300 mb-4 sm:mb-6 leading-relaxed text-xs sm:text-sm px-4">
               BE PART OF THE FUTURE OF MEME INVESTING. GET IN EARLY AND HELP SHAPE CRYPTO CULTURE.

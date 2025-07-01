@@ -9,7 +9,7 @@ const HowItWorks = () => {
       <div className="container mx-auto px-4 sm:px-6">
         <div className="text-center mb-12 sm:mb-16" data-aos="fade-up">
           <h2 className="heading-pixel text-2xl sm:text-4xl lg:text-5xl text-white mb-4 sm:mb-6 text-pixel-shadow px-4">
-            SECURE & <span className="bg-gradient-to-r from-orange-400 to-pink-500 bg-clip-text text-transparent">TRANSPARENT</span>
+            SECURE & <span className="text-cyan-400 text-pixel-glow">TRANSPARENT</span>
           </h2>
         </div>
 
@@ -119,7 +119,7 @@ const HowItWorks = () => {
         <div className="text-center" data-aos="fade-up" data-aos-delay="1000">
           <div className="card-pixel bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-8 border-orange-500 hover:border-orange-400 transition-all duration-300 max-w-2xl mx-auto">
             <h3 className="heading-pixel text-xl sm:text-3xl text-white mb-3 sm:mb-4 text-pixel-shadow px-4">
-              READY TO <span className="bg-gradient-to-r from-orange-400 to-pink-500 bg-clip-text text-transparent">JOIN THE TREASURY?</span>
+              READY TO <span className="bg-gradient-to-r from-orange-400 to-cyan-500 bg-clip-text text-transparent">JOIN THE TREASURY?</span>
             </h3>
             <p className="font-pixel text-gray-300 mb-4 sm:mb-6 leading-relaxed text-xs sm:text-sm px-4">
               BE PART OF THE FUTURE OF MEME INVESTING. GET IN EARLY AND HELP SHAPE CRYPTO CULTURE.
