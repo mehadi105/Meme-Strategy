@@ -1,8 +1,7 @@
 import { Shield, Lock, Eye, Users } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
 
 const HowItWorks = () => {
-  const navigate = useNavigate();
+  
   
   return (
     <section className="py-12 sm:py-20 relative">
@@ -124,12 +123,7 @@ const HowItWorks = () => {
             <p className="font-pixel text-gray-300 mb-4 sm:mb-6 leading-relaxed text-xs sm:text-sm px-4">
               BE PART OF THE FUTURE OF MEME INVESTING. GET IN EARLY AND HELP SHAPE CRYPTO CULTURE.
             </p>
-            <button 
-              onClick={() => navigate('/presale')}
-              className="btn-pixel bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white border-orange-700 px-4 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm hover:scale-105 transition-all duration-300"
-            >
-              JOIN THE $MSTR PRESALE
-            </button>
+            
           </div>
         </div>
       </div>

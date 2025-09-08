@@ -194,37 +194,7 @@ const Stats = () => {
           </div>
         </div>
 
-        {/* Presale Information */}
-        <div className="card-pixel bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-2xl sm:rounded-3xl p-4 sm:p-8 border-orange-500">
-          <h3 className="heading-pixel text-xl sm:text-3xl text-white mb-6 sm:mb-8 text-center text-pixel-shadow px-4">
-            HOW THE <span className="text-orange-400 text-pixel-glow">PRESALE</span> WORKS
-          </h3>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {[
-              { number: '50', title: '50 TIERS', description: 'PRICE STARTS AT $0.0005 AND INCREASES EVERY TIER', color: 'from-orange-500 to-red-500', borderColor: 'border-red-600' },
-              { number: '10%', title: 'EARLY BONUS', description: '10% EXTRA TOKENS IN TIERS 1–3', color: 'from-green-500 to-emerald-500', borderColor: 'border-green-600' },
-              { number: '5%', title: 'REFERRAL BONUS', description: '5% BONUS FOR BOTH SENDER AND RECEIVER', color: 'from-cyan-500 to-blue-500', borderColor: 'border-blue-600' }
-            ].map((item, index) => (
-              <div key={index} className="text-center">
-                <div className={`w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br ${item.color} rounded-full mx-auto mb-3 sm:mb-4 flex items-center justify-center text-white font-black text-sm sm:text-xl border-2 sm:border-4 ${item.borderColor}`}>
-                  {item.number}
-                </div>
-                <h4 className="heading-pixel text-white mb-2 text-xs sm:text-sm">{item.title}</h4>
-                <p className="font-pixel text-gray-400 text-xs px-2">{item.description}</p>
-              </div>
-            ))}
-          </div>
-          
-          <div className="mt-6 sm:mt-8 text-center">
-            <p className="font-pixel text-gray-300 mb-3 sm:mb-4 text-xs sm:text-sm px-4">
-              <span className="text-white text-pixel-glow">TOTAL SUPPLY:</span> 10B $MSTR | <span className="text-orange-400 text-pixel-glow">35% IN PRESALE</span>
-            </p>
-            <p className="font-retro text-gray-400 text-xs px-4">
-              BUY WITH: ETH, SOL, BTC, BNB, USDT, USDC, OR CREDIT CARD
-            </p>
-          </div>
-        </div>
+        {/* Presale Information removed */}
       </div>
     </section>
   );

@@ -9,7 +9,6 @@ import Roadmap from './components/Roadmap';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import Ticker from './components/Ticker';
-import Presale from './components/Presale';
 import HowToBuy from './components/HowToBuy';
 import { Toaster } from 'react-hot-toast';
 
@@ -132,7 +131,7 @@ function App() {
         <div className="relative z-10">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/presale" element={<Presale />} />
+            {/* Presale route removed */}
             <Route path="/how-to-buy" element={<HowToBuy />} />
           </Routes>
         </div>

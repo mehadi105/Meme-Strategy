@@ -6,11 +6,11 @@ const Tokenomics = () => {
 
   const tokenomicsData = [
     {
-      title: 'PRESALE',
+      title: 'COMMUNITY DISTRIBUTION',
       percentage: 35,
       color: 'from-red-500 to-red-600',
       icon: Coins,
-      description: '3.5B TOKENS FOR EARLY SUPPORTERS'
+      description: '3.5B TOKENS FOR COMMUNITY PROGRAMS'
     },
     {
       title: 'STAKING',
@@ -43,7 +43,7 @@ const Tokenomics = () => {
   ];
 
   return (
-    <section id="presale" className="py-12 sm:py-20 relative">
+    <section id="tokenomics" className="py-12 sm:py-20 relative">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="heading-pixel text-2xl sm:text-4xl lg:text-5xl text-white mb-4 sm:mb-6 text-pixel-shadow px-4">
@@ -103,60 +103,20 @@ const Tokenomics = () => {
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
-          {/* Left Side - Tokenomics Cards */}
-          <div className="grid gap-3 sm:gap-4">
-            {tokenomicsData.map((item, index) => (
-              <div
-                key={index}
-                className="relative card-pixel bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 border-cyan-500 hover:border-cyan-400 transition-all duration-300 hover:scale-105 cursor-pointer"
-                onMouseEnter={() => setActiveTooltip(index)}
-                onMouseLeave={() => setActiveTooltip(null)}
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-3 sm:space-x-4">
-                    {item.icon ? (
-                      <div className={`w-8 h-8 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center border-2 border-slate-700`}>
-                        <item.icon className="text-white" size={16} />
-                      </div>
-                    ) : null}
-                    <div>
-                      <h3 className="heading-pixel text-white text-sm sm:text-lg text-pixel-glow">{item.title}</h3>
-                      <p className="font-pixel text-blue-300 text-xs">{item.description}</p>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <div className="heading-pixel text-lg sm:text-2xl text-white text-pixel-glow">{item.percentage}%</div>
-                    <div className="font-pixel text-cyan-300 text-xs">{(item.percentage * 100)}M TOKENS</div>
-                  </div>
-                </div>
-                
-                {/* Progress Bar */}
-                <div className="mt-3 sm:mt-4 w-full bg-slate-700 rounded-full h-2 sm:h-3 border-2 border-slate-600">
-                  <div 
-                    className={`bg-gradient-to-r ${item.color} h-full rounded-full transition-all duration-1000`}
-                    style={{ width: `${item.percentage * 2.5}%` }}
-                  ></div>
-                </div>
-
-                {/* Tooltip */}
-                {activeTooltip === index && (
-                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 card-pixel bg-slate-900 text-white p-2 sm:p-3 rounded-lg border-cyan-500 text-sm whitespace-nowrap z-10">
-                    <span className="font-pixel text-xs">{item.description}</span>
-                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-b-slate-900"></div>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-
-          {/* Right Side - Clean Visual Chart */}
-          <div className="flex flex-col items-center">
-            <div className="relative w-64 h-64 sm:w-80 sm:h-80 mb-6 sm:mb-8">
-              {/* Character pointing at pie chart */}
-              <img src="/character-1.svg" alt="Character Pointing" className="absolute -right-8 lg:-right-40 top-1/2 -translate-y-1/2 h-52 lg:h-80 w-auto z-20 scale-x-[-1]" style={{transform: 'translateY(-50%) scaleX(-1)'}} />
+        <div className="grid grid-cols-1 place-items-center">
+          {/* Side-by-side: Character pointing at pie chart */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10 mb-6 sm:mb-8">
+            <img src="/character-1.svg" alt="Character Pointing" className="h-40 sm:h-56 lg:h-64 w-auto" />
+            <div className="relative w-64 h-64 sm:w-80 sm:h-80">
               {/* Pie Chart - Clean without background GIF */}
               <svg viewBox="0 0 200 200" className="w-full h-full transform -rotate-90">
+                {/* Fallback ring when no data slices are present */}
+                {tokenomicsData.length === 0 && (
+                  <>
+                    <circle cx="100" cy="100" r="80" fill="none" stroke="#06B6D4" strokeWidth="12" opacity="0.3" />
+                    <circle cx="100" cy="100" r="80" fill="none" stroke="#0EA5E9" strokeWidth="12" strokeDasharray="180 1000" strokeLinecap="round" />
+                  </>
+                )}
                 {tokenomicsData.map((item, index) => {
                   const startAngle = tokenomicsData.slice(0, index).reduce((sum, prev) => sum + prev.percentage, 0) * 3.6;
                   const endAngle = startAngle + item.percentage * 3.6;
@@ -217,49 +177,7 @@ const Tokenomics = () => {
           </div>
         </div>
 
-        {/* Enhanced Stats with GIF Integration */}
-        <div className="mt-12 sm:mt-16 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-          {[
-            { 
-              label: 'PRESALE ALLOCATION', 
-              value: '3.5B', 
-              subtext: '$MSTR TOKENS (35%)',
-              gif: '/road-3.gif',
-              color: 'border-red-500'
-            },
-            { 
-              label: 'STARTING PRICE', 
-              value: '$0.0005', 
-              subtext: 'TIER 1 WITH 10% BONUS',
-              gif: '/road-5.gif',
-              color: 'border-green-500'
-            },
-            { 
-              label: 'VESTING SCHEDULE', 
-              value: 'NONE', 
-              subtext: 'FOR PRESALE BUYERS',
-              gif: '/road-3.gif',
-              color: 'border-cyan-500'
-            }
-          ].map((stat, index) => (
-            <div key={index} className={`card-pixel bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 ${stat.color} text-center hover:border-opacity-100 transition-all duration-300 hover:scale-105`}>
-              <div className="mb-3 sm:mb-4">
-                <img 
-                  src={stat.gif} 
-                  alt={`${stat.label} Animation`}
-                  className="w-8 h-8 sm:w-12 sm:h-12 mx-auto"
-                  style={{
-                    imageRendering: 'pixelated',
-                    filter: 'drop-shadow(0 0 10px rgba(0, 191, 255, 0.5))'
-                  }}
-                />
-              </div>
-              <div className="font-pixel text-gray-400 text-xs mb-2">{stat.label}</div>
-              <div className="heading-pixel text-lg sm:text-2xl text-white mb-1 text-pixel-glow">{stat.value}</div>
-              <div className="font-pixel text-gray-400 text-xs">{stat.subtext}</div>
-            </div>
-          ))}
-        </div>
+        {/* Enhanced Stats removed */}
 
         {/* Dynamic Features Section */}
         <div className="mt-12 sm:mt-16">

@@ -1,18 +1,18 @@
 import { CheckCircle, Clock, Star } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+ 
 
 const Roadmap = () => {
-  const navigate = useNavigate();
+  
   
   const phases = [
     {
       phase: 'PHASE I',
-      title: 'PRESALE & LAUNCH',
+      title: 'LAUNCH & COMMUNITY',
       status: 'current',
       gif: '/road-1.gif',
       color: 'from-orange-500 to-red-600',
       items: [
-        'LAUNCH $MSTR PRESALE',
+        'LAUNCH $MSTR',
         'BUILD COMMUNITY BASE',
         'SMART CONTRACT AUDIT',
         'INITIAL TREASURY SETUP'
@@ -193,12 +193,7 @@ const Roadmap = () => {
             <p className="font-pixel text-cyan-300 mb-4 sm:mb-6 leading-relaxed text-xs sm:text-sm px-4">
               BE PART OF THE FUTURE OF MEME INVESTING. GET IN EARLY AND HELP SHAPE CRYPTO CULTURE.
             </p>
-            <button 
-              onClick={() => navigate('/presale')}
-              className="btn-pixel bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white border-orange-700 px-4 sm:px-6 py-3 sm:py-4 text-xs sm:text-sm hover:scale-105 transition-all duration-300"
-            >
-              JOIN THE $MSTR PRESALE
-            </button>
+            
           </div>
         </div>
       </div>

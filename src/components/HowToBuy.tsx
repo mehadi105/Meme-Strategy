@@ -1,6 +1,6 @@
 
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Wallet, DollarSign, Calculator, Rocket, Shield, Clock, HelpCircle } from 'lucide-react';
+import { Wallet, DollarSign, Calculator, Rocket, Shield, Clock, HelpCircle } from 'lucide-react';
 
 const HowToBuy = () => {
   const navigate = useNavigate();
@@ -10,12 +10,12 @@ const HowToBuy = () => {
       number: 1,
       title: "Connect Your Wallet",
       icon: <Wallet className="w-8 h-8" />,
-      description: "Connect your BSC-compatible wallet to access the presale. We support MetaMask, Trust Wallet, and most Web3 wallets.",
+      description: "Connect your BSC-compatible wallet. We support MetaMask, Trust Wallet, and most Web3 wallets.",
       details: [
         "Download and install MetaMask from metamask.io",
         "Create a new wallet or import existing seed phrase",
         "Add BSC Mainnet to your wallet networks",
-        "Visit our presale page and click 'Connect Wallet'",
+        "Click 'Connect Wallet' on the site",
         "Select your wallet from the connection modal",
         "Approve the connection request in your wallet",
         "Ensure you're on BSC Mainnet (chain ID: 56)"
@@ -44,14 +44,11 @@ const HowToBuy = () => {
       number: 3,
       title: "Enter Amount & Calculate",
       icon: <Calculator className="w-8 h-8" />,
-      description: "Enter your desired BNB amount and see real-time $MSTR calculations including all bonuses and tier information.",
+      description: "Enter your desired BNB amount and see real-time $MSTR calculations.",
       details: [
         "Enter your desired BNB amount in the input field",
         "View instant $MSTR token calculation",
-        "Check current tier pricing and next tier info",
-        "See early bird bonus (10% for tiers 1-3)",
-        "Add referral address for 5% bonus tokens",
-        "Review total tokens including all bonuses",
+        "Review token estimate",
         "Confirm gas fee estimates before proceeding"
       ],
       color: "from-green-500 to-emerald-600",
@@ -90,7 +87,7 @@ const HowToBuy = () => {
     {
       icon: <HelpCircle className="w-6 h-6 text-purple-400" />,
       title: "Need Help?",
-      content: "Join our Telegram community for instant support. Our team is available 24/7 to help with any issues during the presale process."
+      content: "Join our Telegram community for instant support. Our team is available 24/7 to help with any issues during the process."
     }
   ];
 
@@ -128,32 +125,12 @@ const HowToBuy = () => {
   ];
 
   const contractInfo = {
-    presale: "0xe8BF621BAf230FB3B15A07ACF9103Ff9Ba60efAA",
     token: "0x78e3efa2450239561F204D937F6A5a5f95DE5a06",
     network: "BSC Mainnet",
     chainId: "56"
   };
 
-  const bonusInfo = [
-    {
-      type: "Early Bird Bonus",
-      percentage: "10%",
-      condition: "Tiers 1-3 only",
-      description: "Get 10% extra tokens for early participation in the first 3 tiers"
-    },
-    {
-      type: "Referral Bonus",
-      percentage: "5%",
-      condition: "Valid referral address",
-      description: "Earn 5% bonus tokens when you use a valid referral address"
-    },
-    {
-      type: "Cumulative Bonuses",
-      percentage: "Up to 15%",
-      condition: "Early bird + Referral",
-      description: "Stack both bonuses for maximum token rewards"
-    }
-  ];
+  // Removed bonusInfo section
 
   return (
     <div className="bg-tron-grid relative overflow-hidden pt-20 px-4">
@@ -170,14 +147,7 @@ const HowToBuy = () => {
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto">
-        {/* Back Button */}
-        <button 
-          onClick={() => navigate('/presale')}
-          className="btn-pixel bg-gradient-to-r from-slate-700 to-slate-800 hover:from-slate-600 hover:to-slate-700 text-cyan-400 border-cyan-500 px-4 py-2 text-xs mb-8 flex items-center gap-2"
-        >
-          <ArrowLeft size={16} />
-          <span className="font-pixel">BACK TO PRESALE</span>
-        </button>
+        {/* Back Button removed */}
         
         {/* Title */}
         <h1 className="heading-pixel text-3xl sm:text-5xl lg:text-6xl text-center mb-4 leading-tight text-pixel-shadow">
@@ -249,18 +219,7 @@ const HowToBuy = () => {
               BONUS REWARDS
             </span>
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {bonusInfo.map((bonus, index) => (
-              <div key={index} className="card-pixel bg-gradient-to-br from-yellow-900/20 to-orange-900/20 backdrop-blur-sm rounded-xl p-6 border-yellow-500/50 hover:border-yellow-400 transition-all duration-300">
-                <div className="text-center mb-4">
-                  <div className="text-3xl font-pixel text-yellow-400 mb-2">{bonus.percentage}</div>
-                  <div className="font-pixel text-white text-sm mb-1">{bonus.type}</div>
-                  <div className="font-pixel text-yellow-600 text-xs">{bonus.condition}</div>
-                </div>
-                <p className="font-retro text-gray-300 text-xs text-center leading-relaxed">{bonus.description}</p>
-              </div>
-            ))}
-          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6" />
         </div>
 
         {/* Contract Information */}
@@ -272,12 +231,7 @@ const HowToBuy = () => {
           </h2>
           <div className="card-pixel bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-xl p-8 border-cyan-500/50">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <h4 className="font-pixel text-cyan-400 text-sm mb-3">PRESALE CONTRACT</h4>
-                <div className="bg-slate-900/80 rounded-lg p-4 border-2 border-slate-700">
-                  <code className="font-pixel text-gray-300 text-xs break-all">{contractInfo.presale}</code>
-                </div>
-              </div>
+              
               <div>
                 <h4 className="font-pixel text-cyan-400 text-sm mb-3">TOKEN CONTRACT</h4>
                 <div className="bg-slate-900/80 rounded-lg p-4 border-2 border-slate-700">
@@ -332,7 +286,7 @@ const HowToBuy = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Timeline */}
             <div className="card-pixel bg-gradient-to-br from-purple-900/20 to-slate-900/30 backdrop-blur-sm rounded-xl p-6 border-purple-500/50">
-              <h3 className="font-pixel text-purple-400 text-lg mb-4 text-center">⏰ PRESALE TIMELINE</h3>
+              <h3 className="font-pixel text-purple-400 text-lg mb-4 text-center">⏰ TIMELINE</h3>
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
                   <span className="font-pixel text-gray-300 text-xs">TIERS 1-3</span>
@@ -346,9 +300,7 @@ const HowToBuy = () => {
                   <span className="font-pixel text-gray-300 text-xs">TIERS 26-50</span>
                   <span className="font-pixel text-orange-400 text-xs">HIGHER TIERS</span>
                 </div>
-                <div className="border-t-2 border-purple-500/30 pt-4">
-                  <p className="font-retro text-gray-400 text-xs text-center">Each tier: 70M $MSTR tokens</p>
-                </div>
+                
               </div>
             </div>
 
@@ -381,15 +333,10 @@ const HowToBuy = () => {
           <div className="card-pixel bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-md rounded-2xl p-8 border-purple-500">
             <h3 className="heading-pixel text-white text-2xl sm:text-3xl mb-4">Ready to Join?</h3>
             <p className="font-retro text-gray-300 mb-6 text-sm sm:text-base">
-              Don't miss out on the early bird bonuses! Join the presale now.
+              Ready to get started? Connect your wallet and begin.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button 
-                onClick={() => navigate('/presale')}
-                className="btn-pixel bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white border-orange-700 px-6 py-3 text-sm hover:scale-105 transition-all duration-300"
-              >
-                🚀 START BUYING $MSTR
-              </button>
+              
               <button 
                 onClick={() => navigate('/')}
                 className="btn-pixel border-2 border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-white px-6 py-3 text-sm bg-transparent hover:scale-105 transition-all duration-300"
