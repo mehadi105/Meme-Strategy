@@ -622,7 +622,7 @@ export default function Presale() {
         
         if (buyer !== address) { // Only show for other people's purchases
           toast.success(
-            `🚀 Someone just bought ${formatEther(tokensBase as bigint).substring(0, 8)} $MSTR for ${formatEther(amountBNB as bigint).substring(0, 6)} BNB!`,
+            `🚀 Someone just bought ${formatEther(tokensBase as bigint).substring(0, 8)} $MEMESTR for ${formatEther(amountBNB as bigint).substring(0, 6)} BNB!`,
             { duration: 4000 }
           );
         }
@@ -799,7 +799,7 @@ export default function Presale() {
         
         <h1 className="heading-pixel text-3xl sm:text-5xl lg:text-6xl text-center mb-4 leading-tight text-pixel-shadow">
           <span className="text-fuchsia-400 text-pixel-glow">
-            $MSTR PRESALE
+            $MEMESTR PRESALE
           </span>
         </h1>
         
@@ -819,7 +819,7 @@ export default function Presale() {
             onClick={() => navigate('/how-to-buy')}
             className="btn-pixel bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 text-white border-purple-700 px-6 py-3 text-xs hover:scale-105 transition-all duration-300 flex items-center gap-2"
           >
-            <span className="font-pixel">📚 HOW TO BUY $MSTR</span>
+            <span className="font-pixel">📚 HOW TO BUY $MEMESTR</span>
           </button>
         </div>
 
@@ -861,8 +861,8 @@ export default function Presale() {
             />
           </div>
           <div className="flex justify-between text-xs mb-6">
-            <span className="font-pixel text-orange-400">{totalSold ? (Number(formatEther(totalSold as bigint)) / 1e9).toFixed(2) : '0'}B $MSTR</span>
-            <span className="font-pixel text-yellow-400">3.5B $MSTR</span>
+            <span className="font-pixel text-orange-400">{totalSold ? (Number(formatEther(totalSold as bigint)) / 1e9).toFixed(2) : '0'}B $MEMESTR</span>
+            <span className="font-pixel text-yellow-400">3.5B $MEMESTR</span>
           </div>
 
           {/* Current Tier Progress */}
@@ -946,23 +946,23 @@ export default function Presale() {
           <div className="card-pixel bg-gradient-to-r from-slate-900 to-slate-800 rounded-xl p-4 border-cyan-500 mb-6">
             <div className="flex justify-between mb-3">
               <span className="font-pixel text-cyan-400 text-xs">YOU WILL RECEIVE:</span>
-              <span className="heading-pixel text-white text-lg text-pixel-glow">{calculateTokenAmount(bnbAmount)} $MSTR</span>
+              <span className="heading-pixel text-white text-lg text-pixel-glow">{calculateTokenAmount(bnbAmount)} $MEMESTR</span>
             </div>
             {currentTier !== undefined && Number(currentTier) <= 3 && (
               <div className="flex justify-between text-sm mb-2">
                 <span className="font-pixel text-green-400 text-xs">EARLY BIRD BONUS (10%):</span>
-                <span className="font-pixel text-green-400 text-xs">+{bonuses.earlyBonus.toFixed(2)} $MSTR</span>
+                <span className="font-pixel text-green-400 text-xs">+{bonuses.earlyBonus.toFixed(2)} $MEMESTR</span>
               </div>
             )}
             {showReferral && referralAddress && (
               <div className="flex justify-between text-sm mb-2">
                 <span className="font-pixel text-blue-400 text-xs">REFERRAL BONUS (5%):</span>
-                <span className="font-pixel text-blue-400 text-xs">+{bonuses.referralBonus.toFixed(2)} $MSTR</span>
+                <span className="font-pixel text-blue-400 text-xs">+{bonuses.referralBonus.toFixed(2)} $MEMESTR</span>
               </div>
             )}
             <div className="border-t-2 border-cyan-500/50 mt-3 pt-3 flex justify-between">
               <span className="font-pixel text-cyan-400 text-xs">TOTAL:</span>
-              <span className="heading-pixel text-orange-400 text-xl text-pixel-glow">{bonuses.total.toFixed(2)} $MSTR</span>
+              <span className="heading-pixel text-orange-400 text-xl text-pixel-glow">{bonuses.total.toFixed(2)} $MEMESTR</span>
             </div>
           </div>
 
@@ -979,7 +979,7 @@ export default function Presale() {
               disabled={isBuyingNoRef || isBuyingWithRef}
               className="btn-pixel w-full py-4 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white border-orange-700 font-pixel text-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105"
             >
-              {isBuyingNoRef || isBuyingWithRef ? 'PROCESSING...' : 'BUY $MSTR'}
+              {isBuyingNoRef || isBuyingWithRef ? 'PROCESSING...' : 'BUY $MEMESTR'}
             </button>
           )}
 

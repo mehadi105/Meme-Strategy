@@ -83,7 +83,7 @@ const Stats = () => {
                 {
                   icon: Trophy,
                   title: 'COMMUNITY VOTED',
-                  description: 'EVERY WEEK, $MSTR HOLDERS VOTE ON WHICH NEW MEMECOINS TO ADD TO OUR TREASURY. YOUR VOICE MATTERS.',
+                  description: 'EVERY WEEK, $MEMESTR HOLDERS VOTE ON WHICH NEW MEMECOINS TO ADD TO OUR TREASURY. YOUR VOICE MATTERS.',
                   color: 'border-green-500',
                   iconColor: 'text-green-400'
                 },

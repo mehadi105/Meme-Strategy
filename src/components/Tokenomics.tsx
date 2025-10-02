@@ -47,10 +47,10 @@ const Tokenomics = () => {
       <div className="container mx-auto px-4 sm:px-6">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="heading-pixel text-2xl sm:text-4xl lg:text-5xl text-white mb-4 sm:mb-6 text-pixel-shadow px-4">
-            <span className="text-orange-400 text-pixel-glow">$MSTR</span> <span className="text-cyan-400 text-pixel-glow">TOKENOMICS</span>
+            <span className="text-orange-400 text-pixel-glow">$MEMESTR</span> <span className="text-cyan-400 text-pixel-glow">TOKENOMICS</span>
           </h2>
           <p className="font-pixel text-sm sm:text-xl text-cyan-300 mb-6 sm:mb-8 px-4">
-            HOW WE DISTRIBUTE 10 BILLION $MSTR TOKENS
+            HOW WE DISTRIBUTE 10 BILLION $MEMESTR TOKENS
           </p>
         </div>
 

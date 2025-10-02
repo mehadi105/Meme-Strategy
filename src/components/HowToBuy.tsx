@@ -27,7 +27,7 @@ const HowToBuy = () => {
       number: 2,
       title: "Get BNB",
       icon: <DollarSign className="w-8 h-8" />,
-      description: "Acquire BNB tokens for your purchase. You'll need BNB for both buying $MSTR tokens and paying gas fees.",
+      description: "Acquire BNB tokens for your purchase. You'll need BNB for both buying $MEMESTR tokens and paying gas fees.",
       details: [
         "Buy BNB from exchanges (Binance, Coinbase)",
         "Transfer BNB to your BSC wallet",
@@ -44,10 +44,10 @@ const HowToBuy = () => {
       number: 3,
       title: "Enter Amount & Calculate",
       icon: <Calculator className="w-8 h-8" />,
-      description: "Enter your desired BNB amount and see real-time $MSTR calculations.",
+      description: "Enter your desired BNB amount and see real-time $MEMESTR calculations.",
       details: [
         "Enter your desired BNB amount in the input field",
-        "View instant $MSTR token calculation",
+        "View instant $MEMESTR token calculation",
         "Review token estimate",
         "Confirm gas fee estimates before proceeding"
       ],
@@ -58,15 +58,15 @@ const HowToBuy = () => {
       number: 4,
       title: "Buy & Secure Your Tokens",
       icon: <Rocket className="w-8 h-8" />,
-      description: "Complete your purchase and secure your $MSTR tokens. Your tokens will be sent directly to your wallet address.",
+      description: "Complete your purchase and secure your $MEMESTR tokens. Your tokens will be sent directly to your wallet address.",
       details: [
         "Review all transaction details carefully",
-        "Click 'Buy $MSTR' button to initiate purchase",
+        "Click 'Buy $MEMESTR' button to initiate purchase",
         "Confirm transaction in your wallet popup",
         "Wait for blockchain confirmation (3-5 minutes)",
         "Receive success notification with tx hash",
         "Tokens automatically sent to your wallet",
-        "Add $MSTR token to wallet to view balance"
+        "Add $MEMESTR token to wallet to view balance"
       ],
       color: "from-cyan-500 to-blue-600",
       borderColor: "border-fuchsia-500"
@@ -115,7 +115,7 @@ const HowToBuy = () => {
     {
       problem: "Tokens Not Received",
       solutions: [
-        "Add $MSTR token contract to wallet",
+        "Add $MEMESTR token contract to wallet",
         "Check transaction hash on BSCScan",
         "Wait up to 15 minutes for confirmation",
         "Refresh wallet or restart app",
@@ -152,7 +152,7 @@ const HowToBuy = () => {
         {/* Title */}
         <h1 className="heading-pixel text-3xl sm:text-5xl lg:text-6xl text-center mb-4 leading-tight text-pixel-shadow">
           <span className="text-purple-400 text-pixel-glow">
-            HOW TO BUY $MSTR
+            HOW TO BUY $MEMESTR
           </span>
         </h1>
         

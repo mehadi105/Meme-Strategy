@@ -12,7 +12,7 @@ const Roadmap = () => {
       gif: '/road-1.gif',
       color: 'from-orange-500 to-red-600',
       items: [
-        'LAUNCH $MSTR',
+        'LAUNCH $MEMESTR',
         'BUILD COMMUNITY BASE',
         'SMART CONTRACT AUDIT',
         'INITIAL TREASURY SETUP'
