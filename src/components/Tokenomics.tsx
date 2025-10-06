@@ -49,9 +49,6 @@ const Tokenomics = () => {
           <h2 className="heading-pixel text-2xl sm:text-4xl lg:text-5xl text-white mb-4 sm:mb-6 text-pixel-shadow px-4">
             <span className="text-orange-400 text-pixel-glow">$MEMESTR</span> <span className="text-cyan-400 text-pixel-glow">TOKENOMICS</span>
           </h2>
-          <p className="font-pixel text-sm sm:text-xl text-cyan-300 mb-6 sm:mb-8 px-4">
-            HOW WE DISTRIBUTE 10 BILLION $MEMESTR TOKENS
-          </p>
         </div>
 
         {/* Dynamic GIF Header Section */}
@@ -103,79 +100,6 @@ const Tokenomics = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 place-items-center">
-          {/* Side-by-side: Character pointing at pie chart */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10 mb-6 sm:mb-8">
-            <img src="/character-1.svg" alt="Character Pointing" className="h-40 sm:h-56 lg:h-64 w-auto" />
-            <div className="relative w-64 h-64 sm:w-80 sm:h-80">
-              {/* Pie Chart - Clean without background GIF */}
-              <svg viewBox="0 0 200 200" className="w-full h-full transform -rotate-90">
-                {/* Fallback ring when no data slices are present */}
-                {tokenomicsData.length === 0 && (
-                  <>
-                    <circle cx="100" cy="100" r="80" fill="none" stroke="#06B6D4" strokeWidth="12" opacity="0.3" />
-                    <circle cx="100" cy="100" r="80" fill="none" stroke="#0EA5E9" strokeWidth="12" strokeDasharray="180 1000" strokeLinecap="round" />
-                  </>
-                )}
-                {tokenomicsData.map((item, index) => {
-                  const startAngle = tokenomicsData.slice(0, index).reduce((sum, prev) => sum + prev.percentage, 0) * 3.6;
-                  const endAngle = startAngle + item.percentage * 3.6;
-                  const largeArcFlag = item.percentage > 50 ? 1 : 0;
-                  
-                  const startX = 100 + 80 * Math.cos((startAngle - 90) * Math.PI / 180);
-                  const startY = 100 + 80 * Math.sin((startAngle - 90) * Math.PI / 180);
-                  const endX = 100 + 80 * Math.cos((endAngle - 90) * Math.PI / 180);
-                  const endY = 100 + 80 * Math.sin((endAngle - 90) * Math.PI / 180);
-                  
-                  return (
-                    <path
-                      key={index}
-                      d={`M 100 100 L ${startX} ${startY} A 80 80 0 ${largeArcFlag} 1 ${endX} ${endY} Z`}
-                      fill={`url(#gradient-${index})`}
-                      className="hover:opacity-80 transition-opacity duration-300"
-                      stroke="#334155"
-                      strokeWidth="3"
-                    />
-                  );
-                })}
-                
-                {/* Gradients */}
-                <defs>
-                  {tokenomicsData.map((item, index) => (
-                    <linearGradient key={index} id={`gradient-${index}`} x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor={item.color.includes('red') ? '#ef4444' : 
-                                                  item.color.includes('blue') ? '#3b82f6' :
-                                                  item.color.includes('purple') ? '#8b5cf6' :
-                                                  item.color.includes('green') ? '#10b981' : '#06b6d4'} />
-                      <stop offset="100%" stopColor={item.color.includes('red') ? '#dc2626' : 
-                                                    item.color.includes('blue') ? '#2563eb' :
-                                                    item.color.includes('purple') ? '#7c3aed' :
-                                                    item.color.includes('green') ? '#059669' : '#0891b2'} />
-                    </linearGradient>
-                  ))}
-                </defs>
-              </svg>
-              
-              {/* Center Label - Clean without GIF */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="heading-pixel text-2xl sm:text-3xl text-white text-pixel-glow">10B</div>
-                  <div className="font-pixel text-gray-400 text-xs">TOTAL SUPPLY</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Legend */}
-            <div className="grid grid-cols-2 gap-3 sm:gap-4 w-full">
-              {tokenomicsData.map((item, index) => (
-                <div key={index} className="flex items-center space-x-2">
-                  <div className={`w-3 h-3 sm:w-4 sm:h-4 rounded bg-gradient-to-br ${item.color} border border-slate-700`}></div>
-                  <span className="font-pixel text-gray-300 text-xs">{item.title}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
 
         {/* Enhanced Stats removed */}
 

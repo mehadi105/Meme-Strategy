@@ -110,7 +110,6 @@ const Hero = () => {
         <div className="mt-12 sm:mt-20 px-4 lg:px-0">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {[
-              { label: 'TOTAL SUPPLY', value: '10B $MEMESTR', change: 'DISTRIBUTION', icon: Coins, color: 'from-green-500 to-emerald-500' },
               { label: 'TREASURY SPLIT', value: '70% MEMES', change: '30% BITCOIN', icon: Bitcoin, color: 'from-yellow-500 to-orange-600' }
             ].map((stat, index) => (
               <div key={index} className="card-pixel bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 border-cyan-500 hover:border-cyan-400 transition-all duration-300 hover:scale-105">
