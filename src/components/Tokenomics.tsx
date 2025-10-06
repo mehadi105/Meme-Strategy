@@ -1,46 +1,6 @@
-import { useState } from 'react';
-import { Coins, Users, Megaphone, Building, Vault, TrendingUp, Zap } from 'lucide-react';
+import { TrendingUp, Zap } from 'lucide-react';
 
 const Tokenomics = () => {
-  const [activeTooltip, setActiveTooltip] = useState<number | null>(null);
-
-  const tokenomicsData = [
-    {
-      title: 'COMMUNITY DISTRIBUTION',
-      percentage: 35,
-      color: 'from-red-500 to-red-600',
-      icon: Coins,
-      description: '3.5B TOKENS FOR COMMUNITY PROGRAMS'
-    },
-    {
-      title: 'STAKING',
-      percentage: 20,
-      color: 'from-blue-500 to-blue-600',
-      icon: Vault,
-      description: 'REWARDS FOR LONG-TERM HOLDERS'
-    },
-    {
-      title: 'MARKETING',
-      percentage: 15,
-      color: 'from-purple-500 to-purple-600',
-      icon: Megaphone,
-      description: 'COMMUNITY GROWTH AND PARTNERSHIPS'
-    },
-    {
-      title: 'TEAM',
-      percentage: 15,
-      color: 'from-green-500 to-green-600',
-      icon: Users,
-      description: 'TEAM ALLOCATION (VESTED)'
-    },
-    {
-      title: 'TREASURY',
-      percentage: 15,
-      color: 'from-cyan-500 to-cyan-600',
-      icon: Building,
-      description: 'DEVELOPMENT AND OPERATIONS (VESTED)'
-    }
-  ];
 
   return (
     <section id="tokenomics" className="py-12 sm:py-20 relative">
@@ -114,7 +74,7 @@ const Tokenomics = () => {
               <div className="space-y-4 sm:space-y-6">
                 {[
                   { gif: '/road-5.gif', title: 'DEFLATIONARY MECHANICS', description: 'REGULAR TOKEN BURNS FROM TREASURY PROFITS REDUCE SUPPLY OVER TIME' },
-                  { icon: TrendingUp, title: 'STAKING REWARDS', description: '20% OF SUPPLY DEDICATED TO REWARDING LONG-TERM HOLDERS' },
+                  { icon: TrendingUp, title: 'STAKING REWARDS', description: '20% IS DEDICATED TO REWARDING LONG-TERM HOLDERS' },
                   { icon: Zap, title: 'UTILITY DRIVEN', description: 'GOVERNANCE VOTING, TREASURY DECISIONS, AND EXCLUSIVE PERKS' }
                 ].map((item, index) => (
                   <div key={index} className="flex items-center space-x-3 sm:space-x-4">
